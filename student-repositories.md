@@ -33,6 +33,9 @@ Repositories are organized by academic year and semester.
 - **Students:** Yossef Okropiridze, Michael Naftalishen 
 - **Repository:** 
 
+### **Group 7**
+- **Students:** Michael Tsegaye, Roi Baly 
+- **Repository:** https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs
 
 ---
 
