@@ -10,28 +10,28 @@ Repositories are organized by academic year and semester.
 ## 📅 2025 – Semester A
 
 ### **Group 1**
-**Students:** Yuri Matyash, Bar Sberro, Sagi Pichon, Guy Dazanshvili 
-**Repository:** https://github.com/YuriMatyash/ML-Guided-Cyber-Security
+- **Students:** Yuri Matyash, Bar Sberro, Sagi Pichon, Guy Dazanshvili 
+- **Repository:** https://github.com/YuriMatyash/ML-Guided-Cyber-Security
 
 ### **Group 2**
-**Students:** Bar Mor  
-**Repository:** https://github.com/ItsBarMor/AI-Driven-Cybersecurity  
+- **Students:** Bar Mor  
+- **Repository:** https://github.com/ItsBarMor/AI-Driven-Cybersecurity  
 
 ### **Group 3**
-**Students:** Daniel Ziv, Daniel Buts  
-**Repository:** https://github.com/beattos/cyber-security- 
+- **Students:** Daniel Ziv, Daniel Buts  
+- **Repository:** https://github.com/beattos/cyber-security- 
 
 ### **Group 4**
-**Students:** Daniel Agranat 
-**Repository:**   
+- **Students:** Daniel Agranat 
+- **Repository:**   
 
 ### **Group 5**
-**Students:** Dana Savenko 
-**Repository:** 
+- **Students:** Dana Savenko 
+- **Repository:** 
 
 ### **Group 5**
-**Students:** Yossef Okropiridze, Michael Naftalishen 
-**Repository:** 
+- **Students:** Yossef Okropiridze, Michael Naftalishen 
+- **Repository:** 
 
 
 ---
