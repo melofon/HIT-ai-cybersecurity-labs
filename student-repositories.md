@@ -29,7 +29,7 @@ Repositories are organized by academic year and semester.
 - **Students:** Dana Savenko 
 - **Repository:** 
 
-### **Group 5**
+### **Group 6**
 - **Students:** Yossef Okropiridze, Michael Naftalishen 
 - **Repository:** 
 
