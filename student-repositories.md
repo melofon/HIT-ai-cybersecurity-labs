@@ -9,33 +9,15 @@ Repositories are organized by academic year and semester.
 
 ## 📅 2025 – Semester A
 
-### **Group 1**
-- **Students:** Yuri Matyash, Bar Sberro, Sagi Pichon, Guy Dazanshvili 
-- **Repository:** https://github.com/YuriMatyash/ML-Guided-Cyber-Security
-
-### **Group 2**
-- **Students:** Adi Haim, Afik Aharon,Bar Mor, Ron Noiman  
-- **Repository:** https://github.com/ItsBarMor/AI-Driven-Cybersecurity  
-
-### **Group 3**
-- **Students:** Daniel Ziv, Daniel Buts  
-- **Repository:** https://github.com/beattos/cyber-security- 
-
-### **Group 4**
-- **Students:** Daniel Agranat 
-- **Repository:** https://github.com/gitseb14/AI-Driven-Cybersecurity-Course---HIT  
-
-### **Group 5**
-- **Students:** Dana Savenko 
-- **Repository:** 
-
-### **Group 6**
-- **Students:** Yossef Okropiridze, Michael Naftalishen 
-- **Repository:** 
-
-### **Group 7**
-- **Students:** Michael Tsegaye, Roi Baly 
-- **Repository:** https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs
+| Group | Students | Repository |
+|-------|----------|------------|
+| **1** | Yuri Matyash, Bar Sberro, Sagi Pichon, Guy Dazanshvili | [YuriMatyash/ML-Guided-Cyber-Security](https://github.com/YuriMatyash/ML-Guided-Cyber-Security) |
+| **2** | Adi Haim, Afik Aharon, Bar Mor, Ron Noiman | [ItsBarMor/AI-Driven-Cybersecurity](https://github.com/ItsBarMor/AI-Driven-Cybersecurity) |
+| **3** | Daniel Ziv, Daniel Buts | [beattos/cyber-security-](https://github.com/beattos/cyber-security-) |
+| **4** | Daniel Agranat | [gitseb14/AI-Driven-Cybersecurity-Course---HIT](https://github.com/gitseb14/AI-Driven-Cybersecurity-Course---HIT) |
+| **5** | Dana Savenko | — |
+| **6** | Yossef Okropiridze, Michael Naftalishen | — |
+| **7** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
 
 ---
 
