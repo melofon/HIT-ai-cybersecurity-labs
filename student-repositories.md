@@ -14,7 +14,7 @@ Repositories are organized by academic year and semester.
 - **Repository:** https://github.com/YuriMatyash/ML-Guided-Cyber-Security
 
 ### **Group 2**
-- **Students:** Bar Mor  
+- **Students:** Adi Haim, Afik Aharon,Bar Mor, Ron Noiman  
 - **Repository:** https://github.com/ItsBarMor/AI-Driven-Cybersecurity  
 
 ### **Group 3**
