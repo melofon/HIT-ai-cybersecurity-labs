@@ -1,0 +1,23 @@
+services:
+  jupyterlab:
+    # https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook
+    image: quay.io/jupyter/scipy-notebook
+    container_name: jupyterlab-sec
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=lab
+      - NB_UID=1000
+      - NB_GID=1000
+    volumes:
+      - ./work:/home/jovyan/work
+    command: 
+      - bash
+      - -lc
+      - |
+        mamba install -y \
+          polars \
+        && start-notebook.sh \
+             --ServerApp.token='' \
+             --ServerApp.password=''
