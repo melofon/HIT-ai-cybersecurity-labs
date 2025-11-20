@@ -16,7 +16,7 @@ Repositories are organized by academic year and semester.
 | **3** | Daniel Ziv, Daniel Buts | [beattos/cyber-security-](https://github.com/beattos/cyber-security-) |
 | **4** | Daniel Agranat | [gitseb14/AI-Driven-Cybersecurity-Course---HIT](https://github.com/gitseb14/AI-Driven-Cybersecurity-Course---HIT) |
 | **5** | Dana Savenko | — |
-| **6** | Yossef Okropiridze, Michael Naftalishen | — |
+| **6** | Yossef Okropiridze, Michael Naftalishen | [michael-naf/hit_cybersecurity_enhabced_by_ai](https://github.com/michael-naf/hit_cybersecurity_enhabced_by_ai) |
 | **7** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
 | **8** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
 
@@ -28,7 +28,7 @@ Repositories are organized by academic year and semester.
 Each link leads to a student repository containing:
 
 - Lab 1 – MITRE ATT&CK Mapping  
-- Lab 2 – 
+- Lab 2 – Simple Anomaly Detection
 
 Content varies by group depending on chosen datasets, threat report,  
 pipeline configuration, and selected project topic.
