@@ -18,7 +18,8 @@ Repositories are organized by academic year and semester.
 | **5** | Dana Savenko | — |
 | **6** | Yossef Okropiridze, Michael Naftalishen | [michael-naf/hit_cybersecurity_enhabced_by_ai](https://github.com/michael-naf/hit_cybersecurity_enhabced_by_ai) |
 | **7** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
-| **8** | Ruth Dubinsky, za Titurenko | - |
+| **8** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
+
 
 ---
 
