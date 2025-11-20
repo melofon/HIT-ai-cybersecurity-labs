@@ -15,10 +15,10 @@ Repositories are organized by academic year and semester.
 | **2** | Adi Haim, Afik Aharon, Bar Mor, Ron Noiman | [ItsBarMor/AI-Driven-Cybersecurity](https://github.com/ItsBarMor/AI-Driven-Cybersecurity) |
 | **3** | Daniel Ziv, Daniel Buts | [beattos/cyber-security-](https://github.com/beattos/cyber-security-) |
 | **4** | Daniel Agranat | [gitseb14/AI-Driven-Cybersecurity-Course---HIT](https://github.com/gitseb14/AI-Driven-Cybersecurity-Course---HIT) |
-| **5** | Dana Savenko | — |
+| **5** | Dana Savenko | [savenkodana-hub/GuidedCyberSecurity](https://github.com/savenkodana-hub/GuidedCyberSecurity) |
 | **6** | Yossef Okropiridze, Michael Naftalishen | [michael-naf/hit_cybersecurity_enhabced_by_ai](https://github.com/michael-naf/hit_cybersecurity_enhabced_by_ai) |
 | **7** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
-| **8** | Ruth Dubinsky, za Titurenko | - |
+| **8** | Ruth Dubinsky, Liza Titurenko | - |
 
 ---
 
