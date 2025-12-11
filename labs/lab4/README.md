@@ -5,3 +5,4 @@ Build the image with `docker buildx build --load -t cybersec-agent-devui .` wher
 - `--load` - load the image into local Docker registry
 - `-t cybersec-agent-devui` - image tag`
 - `.` - path to Dockerfile
+

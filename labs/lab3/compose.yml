@@ -1,0 +1,124 @@
+services:
+  # Kafka in KRaft mode (w/o Zookeeper)
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: morpheus-kafka
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+      # KRaft requires formatted storage directory
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    networks:
+      - morpheus-network
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    # Format storage if not already formatted and then start Kafka
+    command: |
+      bash -c "
+      if [ ! -f /var/lib/kafka/data/meta.properties ]; then
+        kafka-storage format -t $${CLUSTER_ID} -c /etc/kafka/kafka.properties
+      fi
+      exec /etc/confluent/docker/run
+      "
+
+  # Triton Inference Server
+  triton:
+    image: nvcr.io/nvidia/tritonserver:24.09-py3
+    container_name: morpheus-triton
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
+    command: >
+      tritonserver
+      --model-repository=/models/triton-model-repo
+      --exit-on-error=false
+    volumes:
+      - ./models:/models
+    networks:
+      - morpheus-network
+
+  # Morpheus, main container for running pipelines
+  morpheus:
+    image: nvcr.io/nvidia/morpheus/morpheus:25.06-runtime
+    container_name: morpheus-pipeline
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - MORPHEUS_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - MORPHEUS_TRITON_SERVER_URL=triton:8000
+    volumes:
+      - ./morpheus-data:/workspace/data
+      - ./morpheus-pipelines:/workspace/pipelines
+      - ./morpheus-output:/workspace/output
+    networks:
+      - morpheus-network
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+
+  # Kafka UI
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: morpheus-kafka-ui
+    depends_on:
+      - kafka
+    ports:
+      - "8080:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: morpheus-cluster
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      DYNAMIC_CONFIG_ENABLED: "true"
+    networks:
+      - morpheus-network
+
+  jupyter:
+    image: quay.io/jupyter/scipy-notebook:latest
+    container_name: morpheus-jupyter
+    ports:
+      - "8888:8888"  # JupyterLab
+    environment:
+      - JUPYTER_TOKEN=morpheus
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - TRITON_HTTP_URL=triton:8000
+      - TRITON_GRPC_URL=triton:8001
+    volumes:
+      # Notebooks directory on host mapped to Jupyter work directory
+      - ./notebooks:/home/jovyan/work
+    networks:
+      - morpheus-network
+
+networks:
+  morpheus-network:
+    driver: bridge
+
+volumes:
+  kafka-data:
+  morpheus-data:
+  morpheus-pipelines:
+  morpheus-output:
