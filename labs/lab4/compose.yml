@@ -14,9 +14,8 @@ services:
       - .env
 
     environment:
-      API_BASE_URL: "https://openrouter.ai/api/v1"
-      MODEL: "alibaba/tongyi-deepresearch-30b-a3b:free"
+      API_BASE_URL: "https://api.groq.com/openai/v1"
+      MODEL: "llama-3.1-8b-instant"
       ENABLE_OTEL: true
-      AGENT_NAME: "LARS-fleet-server"
 
     command: ["uv", "run", "devui", "./app", "--host", "0.0.0.0", "--port", "8080"]
