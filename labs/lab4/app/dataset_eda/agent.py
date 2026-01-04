@@ -96,6 +96,44 @@ def describe_dataset(
     }
 
 
+@ai_function(
+    name="show_data",
+    description=(
+        "Returns a single dataset raw data"
+    ),
+)
+def raw_data(
+    dataset_name: Annotated[
+        str,
+        Field(
+            description=(
+                "Name of the dataset to extract. "
+                "Must be one of: 'customers', 'orders'."
+            )
+        ),
+    ],
+) -> Dict:
+    """
+    Return raw data for a specific dataset.
+    """
+    if dataset_name not in datasets_state:
+        return {
+            "ok": False,
+            "error": "dataset_not_found",
+            "message": (
+                f"Dataset '{dataset_name}' not found. "
+                f"Available datasets: {', '.join(datasets_state.keys())}."
+            ),
+        }
+
+    rows = datasets_state[dataset_name]
+
+    return {
+        "ok": True,
+        "dataset": dataset_name,
+        "raw_data": rows,
+    }
+
 # ---------------------------
 #  Provider config
 # ---------------------------
@@ -122,7 +160,7 @@ client = OpenAIChatClient(
 
 agent = ChatAgent(
     chat_client=client,
-    name="openrouter-data-analysis-demo-agent",
+    name="data-analysis-demo-agent",
     instructions="""
         You are a data analysis agent. You work with small tabular datasets
         that are already loaded into memory and exposed via tools.
@@ -156,5 +194,6 @@ agent = ChatAgent(
     tools=[
         list_datasets,
         describe_dataset,
+        raw_data,
     ],
 )

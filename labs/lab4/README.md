@@ -238,3 +238,5 @@ This lab is evaluated as a **foundational exercise**. Simplicity and clarity are
 Links to example agents:
 
 * Hello World Agent – [*Hello World Agent*](app/hello_world/)
+* Dataset Data Analysis Agent – [*Dataset EDA*](app/dataset_eda/)
+
