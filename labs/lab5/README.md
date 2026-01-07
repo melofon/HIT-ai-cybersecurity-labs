@@ -170,7 +170,7 @@ Submissions will be evaluated based on:
 
 * [*Microsoft Agent Framework documentation*](https://learn.microsoft.com/en-us/agent-framework/tutorials/overview)
 * Previous laboratory: [*Introduction to LLM Agents and Tool Usage*](../lab4/README.md)
-* Workflow example for this lab: [*LLM-agent Defensive Workflow Example*](/app/llm_defense)
+* Workflow example for this lab: [*LLM-agent Defensive Workflow Example*](app/llm_defense)
 
 ---
 
