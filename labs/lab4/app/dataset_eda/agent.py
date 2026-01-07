@@ -1,5 +1,5 @@
 import os
-from typing import Annotated, Dict, Optional
+from typing import Annotated, Dict
 
 from agent_framework import ChatAgent, ai_function
 from agent_framework.openai import OpenAIChatClient
@@ -158,9 +158,8 @@ client = OpenAIChatClient(
 #  Agent definition for DevUI
 # ---------------------------
 
-agent = ChatAgent(
-    chat_client=client,
-    name="data-analysis-demo-agent",
+agent = client.create_agent(
+    name="Dataset EDA Agent",
     instructions="""
         You are a data analysis agent. You work with small tabular datasets
         that are already loaded into memory and exposed via tools.

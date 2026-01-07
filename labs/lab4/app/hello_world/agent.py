@@ -1,6 +1,5 @@
 import os
 
-from agent_framework import ChatAgent
 from agent_framework.openai import OpenAIChatClient
 
 base_url = os.getenv("API_BASE_URL")
@@ -13,9 +12,8 @@ client = OpenAIChatClient(
     model_id=model_id,
 )
 
-agent = ChatAgent(
-    chat_client=client,
-    name="hello-world-agent",
+agent = client.create_agent(
+    name="Hello World Agent",
     instructions="""
         You're a friendly agent.
         Ask the user for their name and greet them personally.
