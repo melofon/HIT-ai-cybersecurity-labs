@@ -216,18 +216,3 @@ Students are expected to understand this workflow before designing more complex 
 * Only a small set of allowed intents is supported.
 * No query rewriting or sanitization is performed.
 
-These limitations are **intentional** and serve educational clarity.
-
----
-
-## 10. Next Steps for Students
-
-Based on this workflow, students can:
-
-* extend the policy logic,
-* add query rewriting agents,
-* design attacker–defender workflows,
-* implement logging or audit trails,
-* experiment with more granular intent categories.
-
-This workflow should be treated as a **reference defensive baseline**.
