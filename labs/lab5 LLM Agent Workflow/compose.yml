@@ -7,7 +7,6 @@ services:
       - .:/app
     ports:
       - "8080:8080"
-      - "4317:4317"
     env_file:
       - .env
     environment:
@@ -15,6 +14,5 @@ services:
       MODEL: "openai/gpt-oss-20b"
       ENABLE_OTEL: true
       ENABLE_SENSITIVE_DATA: true             
-      OTLP_ENDPOINT: "http://localhost:4317"
 
     command: ["uv", "run", "devui", "./app", "--host", "0.0.0.0", "--port", "8080"]
