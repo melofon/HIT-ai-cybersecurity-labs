@@ -73,6 +73,11 @@ services:
       - ./notebooks:/home/jovyan/work
     environment:
       JUPYTER_ENABLE_LAB: "yes"
+    command: >
+      start-notebook.sh
+      --ServerApp.token=''
+      --ServerApp.password=''
+      --ServerApp.allow_origin='*'
     networks:
       - pipeline-net
 
