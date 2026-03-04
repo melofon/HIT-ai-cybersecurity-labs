@@ -20,6 +20,7 @@ Repositories are organized by academic year and semester.
 | **7** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
 | **8** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
 | **9** | Eliya Hugi | [eliya2255/Cyber-Labs-Eliya](https://github.com/eliya2255/Cyber-Labs-Eliya) |
+| **10** | Yarden Levi, Nadav Shapira | [nadav21sh/AI-Driven-Cybersecurity-Course](https://github.com/nadav21sh/AI-Driven-Cybersecurity-Course) |
 ---
 
 ## 📁 Structure
