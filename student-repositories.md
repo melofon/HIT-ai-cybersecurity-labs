@@ -7,7 +7,7 @@ Repositories are organized by academic year and semester.
 
 ---
 
-## 📅 2025 – Semester A
+## 📅 2025 – Semester A (Andrei Kojukhov, Viacheslav Nefedov)
 
 | Group | Students | Repository |
 |-------|----------|------------|
@@ -21,6 +21,22 @@ Repositories are organized by academic year and semester.
 | **8** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
 | **9** | Eliya Hugi | [eliya2255/Cyber-Labs-Eliya](https://github.com/eliya2255/Cyber-Labs-Eliya) |
 | **10** | Yarden Levi, Nadav Shapira | [nadav21sh/AI-Driven-Cybersecurity-Course](https://github.com/nadav21sh/AI-Driven-Cybersecurity-Course) |
+
+## 📅 2026 – Semester B
+
+### Morning group (Viacheslav Nefedov)
+
+| Group | Students | Repository |
+|-------|----------|------------|
+| **1** |  | |
+
+### Evening group (Andrei Kojukhov)
+
+| Group | Students | Repository |
+|-------|----------|------------|
+| **1** | Aviv Heller, Shaked Yakobi | [Avov7/AI-Driven-Cybersecurity](https://github.com/Avov7/AI-Driven-Cybersecurity) |
+| **2** | Daniela Slavutin | [DanielaSlavutin/AI_Driven_CyberSecurity](https://github.com/DanielaSlavutin/AI_Driven_CyberSecurity) |
+
 ---
 
 ## 📁 Structure
