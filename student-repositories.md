@@ -13,14 +13,13 @@ Repositories are organized by academic year and semester.
 |-------|----------|------------|
 | **1** | Yuri Matyash, Bar Sberro, Sagi Pichon, Guy Dazanshvili | [YuriMatyash/ML-Guided-Cyber-Security](https://github.com/YuriMatyash/ML-Guided-Cyber-Security) |
 | **2** | Adi Haim, Afik Aharon, Bar Mor, Ron Noiman | [ItsBarMor/AI-Driven-Cybersecurity](https://github.com/ItsBarMor/AI-Driven-Cybersecurity) |
-| **3** | Daniel Ziv, Daniel Buts | [beattos/cyber-security-](https://github.com/beattos/cyber-security-) |
-| **4** | Daniel Agranat | [gitseb14/AI-Driven-Cybersecurity-Course---HIT](https://github.com/gitseb14/AI-Driven-Cybersecurity-Course---HIT) |
-| **5** | Ruth Dubinsky, Dana Savenko | [Ruth1320/CyberSecurity](https://github.com/Ruth1320/CyberSecurity) |
-| **6** | Yossef Okropiridze, Michael Naftalishen | [michael-naf/hit_cybersecurity_enhabced_by_ai](https://github.com/michael-naf/hit_cybersecurity_enhabced_by_ai) |
-| **7** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
-| **8** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
-| **9** | Eliya Hugi | [eliya2255/Cyber-Labs-Eliya](https://github.com/eliya2255/Cyber-Labs-Eliya) |
-| **10** | Yarden Levi, Nadav Shapira | [nadav21sh/AI-Driven-Cybersecurity-Course](https://github.com/nadav21sh/AI-Driven-Cybersecurity-Course) |
+| **3** | Daniel Ziv, Daniel Buts, Daniel Agranat | [beattos/cyber-security-](https://github.com/beattos/cyber-security-) |
+| **4** | Ruth Dubinsky, Dana Savenko | [Ruth1320/CyberSecurity](https://github.com/Ruth1320/CyberSecurity) |
+| **5** | Yossef Okropiridze, Michael Naftalishen | [michael-naf/hit_cybersecurity_enhabced_by_ai](https://github.com/michael-naf/hit_cybersecurity_enhabced_by_ai) |
+| **6** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
+| **7** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
+| **8** | Eliya Hugi | [eliya2255/Cyber-Labs-Eliya](https://github.com/eliya2255/Cyber-Labs-Eliya) |
+| **9** | Yarden Levi, Nadav Shapira | [nadav21sh/AI-Driven-Cybersecurity-Course](https://github.com/nadav21sh/AI-Driven-Cybersecurity-Course) |
 
 ## 📅 2026 – Semester B
 
