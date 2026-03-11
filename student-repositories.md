@@ -16,7 +16,7 @@ Repositories are organized by academic year and semester.
 | **3** | Daniel Ziv, Daniel Buts, Daniel Agranat | [beattos/cyber-security-](https://github.com/beattos/cyber-security-) |
 | **4** | Ruth Dubinsky, Dana Savenko | [Ruth1320/CyberSecurity](https://github.com/Ruth1320/CyberSecurity) |
 | **5** | Yossef Okropiridze, Michael Naftalishen | [michael-naf/hit_cybersecurity_enhabced_by_ai](https://github.com/michael-naf/hit_cybersecurity_enhabced_by_ai) |
-| **6** | Michael Tsegaye, Roi Baly | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
+| **6** | Michael Tsegaye, Roi Baly, Tomer Barel | [MikiTsegaye/Cyber_AI_Enhanced_Labs](https://github.com/MikiTsegaye/Cyber_AI_Enhanced_Labs) |
 | **7** | Shalev Cohen, Noam Hadad | [Shalevc3/AI-Enhanced-Cybersecurity](https://github.com/Shalevc3/AI-Enhanced-Cybersecurity) |
 | **8** | Eliya Hugi | [eliya2255/Cyber-Labs-Eliya](https://github.com/eliya2255/Cyber-Labs-Eliya) |
 | **9** | Yarden Levi, Nadav Shapira | [nadav21sh/AI-Driven-Cybersecurity-Course](https://github.com/nadav21sh/AI-Driven-Cybersecurity-Course) |
