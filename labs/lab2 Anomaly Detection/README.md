@@ -5,6 +5,12 @@ Your goal is to build a small end-to-end anomaly detection pipeline for a cybers
 
 ---
 
+## **0. How to run an example**
+
+* run `cd "labs/lab2 Anomaly Detection"` to navigate to the lab folder
+* build docker image with `docker build -t cybersec-jupyter .`
+* open jupyterlab with `http://127.0.0.1:8888/lab`
+
 ## **1. Prepare a cybersecurity-related dataset**
 
 You may either **(A) generate synthetic data** (e.g., login events, network flows, process activity, DNS queries), or **(B) download a small real dataset** from the internet (e.g., a reduced sample from UNSW-NB15, CIC-IDS, KDD-based sets, Windows event logs, etc.).
