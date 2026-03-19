@@ -9,6 +9,7 @@ Your goal is to build a small end-to-end anomaly detection pipeline for a cybers
 
 * run `cd "labs/lab2 Anomaly Detection"` to navigate to the lab folder
 * build docker image with `docker build -t cybersec-jupyter .`
+* run `docker compose up` command to run the container
 * open jupyterlab with `http://127.0.0.1:8888/lab`
 
 ## **1. Prepare a cybersecurity-related dataset**
