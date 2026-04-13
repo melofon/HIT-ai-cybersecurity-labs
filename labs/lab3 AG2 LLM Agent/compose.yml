@@ -1,0 +1,21 @@
+services:
+  chainlit:
+    image: cybersec-agent-chainlit-lab3
+    container_name: cybersec-agent-chainlit-lab3
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      API_BASE_URL: "https://api.groq.com/openai/v1"
+      MODEL: "qwen/qwen3-32b"
+      CHAINLIT_APP: "${CHAINLIT_APP:-app/dataset_eda/app.py}"
+
+    # Dev mode:
+    # - the project directory is bind-mounted into /app;
+    # - the agent entrypoint is selected via CHAINLIT_APP;
+    # - restart the container after changing code or the selected app.
+    command: ["sh", "-lc", "uv run chainlit run \"$${CHAINLIT_APP:-app/dataset_eda/app.py}\" --host 0.0.0.0 --port 8000"]
