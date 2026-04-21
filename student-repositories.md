@@ -29,6 +29,7 @@ Repositories are organized by academic year and semester.
 |-------|----------|------------|
 | **1** | Daniel lonkry | [DanielLankry/HIT-ai-cybersecurity-labs](https://github.com/DanielLankry/HIT-ai-cybersecurity-labs) |
 | **2** | Sharon Weisman, Rom Ben Yakar | [Kinovo97/HIT-AI-Cybersecurity-Labs](https://github.com/Kinovo97/HIT-AI-Cybersecurity-Labs) |
+| **3** | Nathan Beer | [NathanBeer/cyberProj](https://github.com/NathanBeer/cyberProj) |
 
 ### Evening group (Andrei Kojukhov)
 
