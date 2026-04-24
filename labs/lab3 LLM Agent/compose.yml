@@ -9,16 +9,17 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       API_BASE_URL: "https://api.groq.com/openai/v1"
       MODEL: "qwen/qwen3-32b"
 
     # Dev mode:
     # - the project directory is bind-mounted into /app for source edits;
-    # - Python dependencies stay inside the image in /opt/venv;
+    # - Python dependencies are installed into the container system environment;
     # - Chainlit runtime files (.chainlit, .files) stay inside the container
     #   under /chainlit-runtime;
     # - the reference agent always runs from /app/app/agent/app.py;
     # - restart the container after changing Python code.
-    command: ["/opt/venv/bin/chainlit", "run", "/app/app/agent/app.py", "--host", "0.0.0.0", "--port", "8000", "--headless"]
+    command: ["chainlit", "run", "/app/app/agent/app.py", "--host", "0.0.0.0", "--port", "8000", "--headless"]

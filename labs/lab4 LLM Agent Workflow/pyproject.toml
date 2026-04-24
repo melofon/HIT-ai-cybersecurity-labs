@@ -1,0 +1,11 @@
+[project]
+name = "lab4-llm-agent-workflow"
+version = "0.1.0"
+description = "Multi-agent workflow lab with AG2 and Chainlit"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "ag2[openai]>=0.9",
+    "chainlit>=2.0",
+]

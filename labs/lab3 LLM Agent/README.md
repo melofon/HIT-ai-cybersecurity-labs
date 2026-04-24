@@ -31,11 +31,14 @@ This laboratory is based on a prepared Docker environment that includes:
 
 * **AG2** (formerly AutoGen) — an open-source agent framework
 * **Chainlit** — a web-based chat UI for interacting with agents
+* **uv** — the dependency manager used inside the Docker image
 
 The repository structure is as follows:
 
 ```
 lab3/
+├── .dockerignore
+├── .gitignore
 ├── Dockerfile
 ├── compose.yml
 ├── app/
@@ -45,6 +48,7 @@ lab3/
 ├── .env
 ├── chainlit.md
 ├── pyproject.toml
+├── uv.lock
 └── README.md
 ```
 
@@ -56,8 +60,11 @@ The reference agent is implemented in `app/agent/`.
 
 The environment is provided in a ready-to-use Docker configuration. No local Python setup is required.
 
-The Docker image contains the virtual environment, and Compose runs Chainlit from that
-container-managed environment.
+The Docker image contains the Python dependencies, and Compose runs Chainlit from
+the container system environment.
+
+Python dependencies are declared in `pyproject.toml` and locked by `uv.lock`.
+Students do not install Python packages on the host machine.
 
 ### 2.1 Configure Environment Variables
 
@@ -104,6 +111,8 @@ After startup, open the Chainlit UI in your browser at **http://localhost:8000**
 
 The project source code is mounted into the container at `/app`, but Chainlit itself
 runs from `/chainlit-runtime`.
+Runtime directories such as `.chainlit` and `.files` are container-only runtime
+state and should not be committed to the repository.
 
 ### 2.5 Restarting After Code Changes
 
