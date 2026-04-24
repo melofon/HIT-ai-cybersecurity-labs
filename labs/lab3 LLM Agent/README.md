@@ -39,26 +39,25 @@ lab3/
 ├── Dockerfile
 ├── compose.yml
 ├── app/
-│   ├── hello_world/
-│   │   ├── app.py
-│   │   └── README.md
-│   └── dataset_eda/
+│   └── agent/
 │       ├── app.py
 │       └── README.md
 ├── .env
+├── chainlit.md
 ├── pyproject.toml
 └── README.md
 ```
 
-Each subdirectory inside `app/` represents **one independent agent**. Each agent is a standalone Chainlit application.
-
-Several example agents are provided and can be used as references for understanding agent structure, system prompts, and tool usage.
+The reference agent is implemented in `app/agent/`.
 
 ---
 
 ## 2. Setup and Running the Environment
 
 The environment is provided in a ready-to-use Docker configuration. No local Python setup is required.
+
+The Docker image contains the virtual environment, and Compose runs Chainlit from that
+container-managed environment.
 
 ### 2.1 Configure Environment Variables
 
@@ -103,36 +102,22 @@ docker compose up
 
 After startup, open the Chainlit UI in your browser at **http://localhost:8000**.
 
-### 2.5 Switching Between Agents
+The project source code is mounted into the container at `/app`, but Chainlit itself
+runs from `/chainlit-runtime`.
 
-Unlike some multi-agent UIs, Chainlit runs **one agent at a time**. In this laboratory, the active agent is selected through the `CHAINLIT_APP` environment variable in `compose.yml`.
+### 2.5 Restarting After Code Changes
 
-The default value is:
+The Compose configuration always runs the reference agent from:
 
-```yaml
-CHAINLIT_APP: "${CHAINLIT_APP:-app/dataset_eda/app.py}"
+```text
+app/agent/app.py
 ```
 
-To run the hello world example instead, start Compose with a different value:
-
-```powershell
-$env:CHAINLIT_APP = "app/hello_world/app.py"
-docker compose up
-```
-
-To run the dataset EDA example explicitly:
-
-```powershell
-$env:CHAINLIT_APP = "app/dataset_eda/app.py"
-docker compose up
-```
-
-If you prefer, you can also edit the value directly in `compose.yml`.
-
-After changing the selected application, restart the container:
+After changing Python code, restart the container:
 
 ```bash
-docker compose down && docker compose up
+docker compose down
+docker compose up
 ```
 
 ### 2.6 Development Mode
@@ -143,10 +128,26 @@ Development mode means:
 
 * the project directory is mounted from the host into the container via `.:/app`
 * you edit files locally in the repository, while Chainlit runs inside Docker
-* the active Chainlit application is chosen via `CHAINLIT_APP`
-* after changing Python code or switching to another app, you restart the container to pick up the changes
+* After changing Python code, restart the container to pick up the changes
 
 This mode is convenient for experimentation because you do not need to rebuild the Docker image after every code change. Rebuilding is only needed when dependencies in `pyproject.toml` change.
+
+### 2.7 Chainlit Welcome Screen (`chainlit.md`)
+
+Chainlit reads `chainlit.md` as the welcome page shown in the browser before or during
+a chat session. In this lab, the file is mounted into `/chainlit-runtime/chainlit.md`
+and is displayed inside the containerized Chainlit UI.
+
+For the course, `chainlit.md` is used as a short student-facing guide:
+
+* remind the user what the current lab is about
+* suggest first prompts for the reference agent
+* point students to the required submission structure
+* explain that tool calls are visible as expandable Chainlit steps
+
+The agent itself also sends a Chainlit welcome message from `@cl.on_chat_start`
+in `app/agent/app.py`. Use `chainlit.md` for static course instructions and the
+agent welcome message for task-specific guidance from the running agent.
 
 ---
 
@@ -162,19 +163,17 @@ Your agent does **not** need to solve a real cybersecurity problem. The task is 
 
 ### 3.1 Agent Location
 
-Your agent must be implemented as a **new directory** inside:
+Your agent must be implemented in the existing reference agent directory:
 
 ```
-app/
+app/agent/
 ```
 
-Example:
+The directory already contains a working example. You may modify it directly or
+replace it with your own simple agent implementation.
 
-```
-app/log_explainer_agent/
-```
-
-Your agent directory must contain at least an `app.py` file that can be run with `chainlit run app/<your_agent>/app.py`.
+Your agent directory must contain at least an `app.py` file. In the container,
+Compose runs it as `/app/app/agent/app.py`.
 
 ---
 
@@ -306,7 +305,6 @@ This lab is evaluated as a **foundational exercise**. Simplicity and clarity are
 
 ## 8. References
 
-Links to example agents:
+Reference agent:
 
-* Hello World Agent – [*Hello World Agent*](app/hello_world/)
-* Dataset Data Analysis Agent – [*Dataset EDA*](app/dataset_eda/)
+* Dataset Analysis Agent – [*app/agent*](app/agent/)

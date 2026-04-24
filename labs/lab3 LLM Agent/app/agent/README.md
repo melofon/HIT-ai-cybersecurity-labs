@@ -104,21 +104,25 @@ This separation is a **core expectation** for student agents in this course.
 
 This agent uses:
 - **AG2** `ConversableAgent` for the LLM-powered assistant,
-- **AG2** `register_function` to expose tools to the agent,
+- the `functions=[...]` argument to expose tools to the agent,
 - **Chainlit** for the chat UI with **Step visualization** of tool calls.
 
-### AG2 Two-Agent Tool Pattern
+### AG2 Single-Agent Tool Pattern
 
-AG2 uses a two-agent architecture for tool usage:
-- **Assistant agent** (`dataset_eda_agent`): the LLM-powered agent that decides *when* and *which* tool to call.
-- **Executor agent** (`tool_executor`): a non-LLM agent that *runs* the tool functions and returns results.
+This example uses the simpler single-agent tool pattern:
 
-Tools are registered with `register_function(fn, caller=assistant, executor=executor)`.
+```python
+assistant = ConversableAgent(
+    name="dataset_analysis_agent",
+    system_message=SYSTEM_PROMPT,
+    llm_config=llm_config,
+    human_input_mode="NEVER",
+    functions=[list_datasets, describe_dataset, show_data],
+)
+```
 
-In this example, the tool-calling loop is implemented explicitly in the `@cl.on_message` handler, making it fully transparent to the student how the process works:
-1. The assistant generates a reply (which may include `tool_calls`).
-2. Tool functions are executed and their results added to the conversation history.
-3. The assistant processes tool results and generates a final text answer.
+The AG2 assistant decides when to call a tool, executes it through the framework,
+and then produces a final answer based on the tool result.
 
 Each tool call is shown in the Chainlit UI as an expandable **Step**, displaying both input arguments and output data.
 

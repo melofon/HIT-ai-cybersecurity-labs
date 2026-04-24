@@ -165,6 +165,19 @@ Rules:
 Always answer in English.
 """
 
+WELCOME_MESSAGE = """\
+Hello. I am the dataset analysis agent for this lab.
+
+I can inspect the small example datasets exposed through my tools and explain
+their structure in plain English. Try asking:
+
+- What datasets are available?
+- Describe the orders dataset.
+- Show the full content of the customers dataset.
+
+When I use a tool, Chainlit will show the call as an expandable step.
+"""
+
 
 def _format_content(content: object) -> str:
     if content is None:
@@ -184,7 +197,7 @@ def _format_content(content: object) -> str:
 async def on_chat_start():
     """Create the AG2 assistant and store it in the user session."""
     assistant = ConversableAgent(
-        name="dataset_eda_agent",
+        name="dataset_analysis_agent",
         system_message=SYSTEM_PROMPT,
         llm_config=llm_config,
         human_input_mode="NEVER",
@@ -192,6 +205,7 @@ async def on_chat_start():
     )
 
     cl.user_session.set("assistant", assistant)
+    await cl.Message(content=WELCOME_MESSAGE, author="dataset_analysis_agent").send()
 
 
 @cl.on_message
