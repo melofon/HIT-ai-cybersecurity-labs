@@ -27,7 +27,7 @@ Repositories are organized by academic year and semester.
 
 | Group | Students | Repository |
 |-------|----------|------------|
-| **1** | Daniel lonkry | [DanielLankry/HIT-ai-cybersecurity-labs](https://github.com/DanielLankry/HIT-ai-cybersecurity-labs) |
+| **1** | Daniel Lankry | [DanielLankry/HIT-ai-cybersecurity-labs](https://github.com/DanielLankry/HIT-ai-cybersecurity-labs) |
 | **2** | Sharon Weisman, Rom Ben Yakar | [Kinovo97/HIT-AI-Cybersecurity-Labs](https://github.com/Kinovo97/HIT-AI-Cybersecurity-Labs) |
 | **3** | Nathan Beer | [NathanBeer/cyberProj](https://github.com/NathanBeer/cyberProj) |
 | **4** | Shai Shotashvili | [Shaus12/projectHITcybersecurity](https://github.com/Shaus12/projectHITcybersecurity) |
@@ -39,6 +39,7 @@ Repositories are organized by academic year and semester.
 |-------|----------|------------|
 | **1** | Aviv Heller, Shaked Yakobi | [Avov7/AI-Driven-Cybersecurity](https://github.com/Avov7/AI-Driven-Cybersecurity) |
 | **2** | Daniela Slavutin | [DanielaSlavutin/AI_Driven_CyberSecurity](https://github.com/DanielaSlavutin/AI_Driven_CyberSecurity) |
+| **3** | Stav Hefetz | [steve2great/HIT-ai-cybersecurity](https://github.com/steve2great/HIT-ai-cybersecurity)
 
 ---
 
