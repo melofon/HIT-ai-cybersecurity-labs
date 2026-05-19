@@ -32,6 +32,7 @@ Repositories are organized by academic year and semester.
 | **3** | Nathan Beer, Lior Lisker | [NathanBeer/cyberProj](https://github.com/NathanBeer/cyberProj) |
 | **4** | Shai Shotashvili | [Shaus12/projectHITcybersecurity](https://github.com/Shaus12/projectHITcybersecurity) |
 | **5** | Bar Levy | [Barlevy98/CyberSecurity](https://github.com/Barlevy98/CyberSecurity) |
+| **6** | Pavel Fadeev | [reidun2/AI-in-Cybersecurity-](https://github.com/reidun2/AI-in-Cybersecurity-) |
 
 ### Evening group (Andrei Kojukhov)
 
