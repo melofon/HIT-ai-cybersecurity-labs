@@ -33,6 +33,7 @@ Repositories are organized by academic year and semester.
 | **4** | Shai Shotashvili | [Shaus12/projectHITcybersecurity](https://github.com/Shaus12/projectHITcybersecurity) |
 | **5** | Bar Levy | [Barlevy98/CyberSecurity](https://github.com/Barlevy98/CyberSecurity) |
 | **6** | Pavel Fadeev | [reidun2/AI-in-Cybersecurity-](https://github.com/reidun2/AI-in-Cybersecurity-) |
+| **7** | Tal Mitzmacher, Amit Mitzmacher | [amit310500/Cyber-Security](https://github.com/amit310500/Cyber-Security) |
 
 ### Evening group (Andrei Kojukhov)
 
