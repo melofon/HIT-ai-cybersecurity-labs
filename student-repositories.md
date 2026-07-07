@@ -61,6 +61,7 @@ Repositories are organized by academic year and semester.
 | **9** | Lotem Kamhi | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | *10* | Ofir Krisple | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | *11* | Liav Turjeman | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
+| *12* | Irvin Rozen | https://github.com/irvin-ro/AI-Driven-Cybersecurity |
 
 ---
 
