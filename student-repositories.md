@@ -56,10 +56,9 @@ Repositories are organized by academic year and semester.
 | **4** | Hai Lakau Magen | [tal-berkovitch/AI-Driven-CyberSecurity](https://github.com/tal-berkovitch/AI-Driven-CyberSecurity) |
 | **5** | Nogah Menahem | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | **6** | Andrei Makarenko | [OriGeva-Code/AI-CyberSecurity](https://github.com/OriGeva-Code/AI-CyberSecurity) |
-| **7** | Boaz Attiya | [OriGeva-Code/AI-CyberSecurity](https://github.com/OriGeva-Code/AI-CyberSecurity) |
+| **7** | Boaz Attiya, Lotem Kamhi | https://github.com/Snafuzila/AI-CyberSecurity.git |
 | **8** | Itay Fisher | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
-| **9** | Lotem Kamhi | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
-| *10* | Ofir Krisple | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
+| **9** | Ofir Krisple | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | *11* | Liav Turjeman | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | *12* | Irvin Rozen | https://github.com/irvin-ro/AI-Driven-Cybersecurity |
 
