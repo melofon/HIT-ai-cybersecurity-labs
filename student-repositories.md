@@ -43,7 +43,7 @@ Repositories are organized by academic year and semester.
 | **2** | Daniela Slavutin | [DanielaSlavutin/AI_Driven_CyberSecurity](https://github.com/DanielaSlavutin/AI_Driven_CyberSecurity) |
 | **3** | Stav Hefetz, Bar Koldanov | [steve2great/HIT-ai-cybersecurity](https://github.com/steve2great/HIT-ai-cybersecurity) |
 | **4** | Tal Berkovitch | [tal-berkovitch/AI-Driven-CyberSecurity](https://github.com/tal-berkovitch/AI-Driven-CyberSecurity) |
-| **5** | Daniel Shatzov | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
+| **5** | Daniel Shatzov, Ori Geva | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | **6** | Ori Geva | [OriGeva-Code/AI-CyberSecurity](https://github.com/OriGeva-Code/AI-CyberSecurity) |
 | **7** | Dror Sulam | https://github.com/dror-sullam/ai-driven-cybersecurity |
 | **7a** | Dror Sulam | https://github.com/dror-sullam/morpheus-lite |
