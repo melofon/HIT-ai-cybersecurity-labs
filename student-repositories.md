@@ -52,7 +52,7 @@ Repositories are organized by academic year and semester.
 
 | Group | Students | Repository |
 |-------|----------|------------|
-| **1** | Almog Babian | [Avov7/AI-Driven-Cybersecurity](https://github.com/Avov7/AI-Driven-Cybersecurity) |
+| **1** | Almog Babian | https://github.com/AlmogBabian |
 | **2** | Hen Golyan, Noga, Menahem | https://github.com/hengolyan/AI-Cyber-Defence-/tree/main |
 | **3** | Rom Horesh Aviv | [steve2great/HIT-ai-cybersecurity](https://github.com/steve2great/HIT-ai-cybersecurity) |
 | **4** | Hai Lakau Magen, Irvin Rozen | https://github.com/irvin-ro/AI-Driven-Cybersecurity |
