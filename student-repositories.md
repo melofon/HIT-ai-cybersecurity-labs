@@ -54,7 +54,7 @@ Repositories are organized by academic year and semester.
 |-------|----------|------------|
 | **1** | Almog Babian | https://github.com/AlmogBabian |
 | **2** | Hen Golyan, Noga, Menahem | https://github.com/hengolyan/AI-Cyber-Defence-/tree/main |
-| **3** | Rom Horesh Aviv | [steve2great/HIT-ai-cybersecurity](https://github.com/steve2great/HIT-ai-cybersecurity) |
+| **3** | Rom Horesh Aviv | https://github.com/AvivRomHoresh/Cyber-AI---AvivRomHoresh/tree/main |
 | **4** | Hai Lakau Magen, Irvin Rozen | https://github.com/irvin-ro/AI-Driven-Cybersecurity |
 | **5** | Andrei Makarenko | [OriGeva-Code/AI-CyberSecurity](https://github.com/OriGeva-Code/AI-CyberSecurity) |
 | **6** | Boaz Attiya, Lotem Kamhi | https://github.com/Snafuzila/AI-CyberSecurity.git |
