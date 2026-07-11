@@ -1,0 +1,41 @@
+services:
+  detector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mitre-log-detector
+    environment:
+      SCAN_INTERVAL_SECONDS: "5"
+      FAILED_PASSWORD_THRESHOLD: "3"
+    volumes:
+      - ./logs:/data:ro
+      - ./output:/output
+      - ./mitre:/mitre:ro
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: lab1a-dashboard
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/data:ro
+      - ./output:/output:ro
+    depends_on:
+      - detector
+    restart: unless-stopped
+
+  simulator:
+    build:
+      context: .
+      dockerfile: Dockerfile.simulator
+    container_name: lab1a-log-simulator
+    environment:
+      SIMULATION_INTERVAL_SECONDS: "10"
+    volumes:
+      - ./logs:/data
+    restart: unless-stopped
+    profiles:
+      - simulation

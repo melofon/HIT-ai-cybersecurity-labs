@@ -1,0 +1,21 @@
+# Generated detector output
+output/*
+!output/.gitkeep
+
+# Full MITRE ATT&CK bundle - download separately
+mitre/enterprise-attack.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log

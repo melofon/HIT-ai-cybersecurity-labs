@@ -1,0 +1,58 @@
+{
+  "type": "bundle",
+  "id": "bundle--lab1a-mitre-attack-mini",
+  "objects": [
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--lab1a-t1110",
+      "created": "2026-07-11T00:00:00.000Z",
+      "modified": "2026-07-11T00:00:00.000Z",
+      "name": "Brute Force",
+      "description": "Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110",
+          "url": "https://attack.mitre.org/techniques/T1110/"
+        }
+      ],
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "credential-access"
+        }
+      ],
+      "x_mitre_domains": [
+        "enterprise-attack"
+      ],
+      "x_mitre_version": "1.7"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--lab1a-t1046",
+      "created": "2026-07-11T00:00:00.000Z",
+      "modified": "2026-07-11T00:00:00.000Z",
+      "name": "Network Service Discovery",
+      "description": "Adversaries may attempt to identify services running on remote hosts and local network infrastructure.",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1046",
+          "url": "https://attack.mitre.org/techniques/T1046/"
+        }
+      ],
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mitre-attack",
+          "phase_name": "discovery"
+        }
+      ],
+      "x_mitre_domains": [
+        "enterprise-attack"
+      ],
+      "x_mitre_version": "2.2"
+    }
+  ]
+}
