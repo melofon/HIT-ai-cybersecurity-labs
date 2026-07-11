@@ -39,7 +39,7 @@ Repositories are organized by academic year and semester.
 
 | Group | Students | Repository |
 |-------|----------|------------|
-| **1** | Aviv Heller, Shaked Yakobi, Aviv Swissa | [Avov7/AI-Driven-Cybersecurity](https://github.com/Avov7/AI-Driven-Cybersecurity) |
+| **1** | Aviv Heller, Shaked Yakobi, Afik Swissa | [Avov7/AI-Driven-Cybersecurity](https://github.com/Avov7/AI-Driven-Cybersecurity) |
 | **2** | Daniela Slavutin | [DanielaSlavutin/AI_Driven_CyberSecurity](https://github.com/DanielaSlavutin/AI_Driven_CyberSecurity) |
 | **3** | Stav Hefetz, Bar Koldanov | [steve2great/HIT-ai-cybersecurity](https://github.com/steve2great/HIT-ai-cybersecurity) |
 | **4** | Tal Berkovitch | [tal-berkovitch/AI-Driven-CyberSecurity](https://github.com/tal-berkovitch/AI-Driven-CyberSecurity) |
