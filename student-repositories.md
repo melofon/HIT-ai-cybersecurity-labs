@@ -48,7 +48,7 @@ Repositories are organized by academic year and semester.
 | **7** | Dror Sulam | https://github.com/dror-sullam/ai-driven-cybersecurity |
 | **7a** | Dror Sulam | https://github.com/dror-sullam/morpheus-lite |
 
-## 📅 2026 – Summer Semester
+## 📅 2026 – Summer Semester (Andrei Kojukhov)
 
 | Group | Students | Repository |
 |-------|----------|------------|
