@@ -45,8 +45,8 @@ Repositories are organized by academic year and semester.
 | **4** | Tal Berkovitch | [tal-berkovitch/AI-Driven-CyberSecurity](https://github.com/tal-berkovitch/AI-Driven-CyberSecurity) |
 | **5** | Daniel Shatzov, Ori Geva | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | **6** | Ori Geva | [OriGeva-Code/AI-CyberSecurity](https://github.com/OriGeva-Code/AI-CyberSecurity) |
-| **7** | Dror Sulam | https://github.com/dror-sullam/ai-driven-cybersecurity |
-| **7a** | Dror Sulam | https://github.com/dror-sullam/morpheus-lite |
+| **7** | Dror Sulam | [dror-sullam/ai-driven-cybersecurity](https://github.com/dror-sullam/ai-driven-cybersecurity) |
+| **7a** | Dror Sulam | [dror-sullam/morpheus-lite](https://github.com/dror-sullam/morpheus-lite) |
 
 ## 📅 2026 – Summer Semester (Andrei Kojukhov)
 
