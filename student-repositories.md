@@ -59,7 +59,7 @@ Repositories are organized by academic year and semester.
 | **5** | Andrei Makarenko | [OriGeva-Code/AI-CyberSecurity](https://github.com/OriGeva-Code/AI-CyberSecurity) |
 | **6** | Boaz Attiya, Lotem Kimchi | https://github.com/Snafuzila/AI-CyberSecurity.git |
 | **7** | Itay Fisher | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
-| **8** | Ofir Krisple | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
+| **8** | Itay Matana | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | **9** | Liav Turjeman | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 
 ---
