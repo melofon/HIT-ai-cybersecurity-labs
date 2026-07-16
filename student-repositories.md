@@ -61,6 +61,7 @@ Repositories are organized by academic year and semester.
 | **7** | Itay Fisher | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | **8** | Itay Matana | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
 | **9** | Liav Turjeman | [Daniel23sh/AI-CyberSecurity](https://github.com/Daniel23sh/AI-CyberSecurity) |
+| **10** | Shahar Larie | |
 
 ---
 
