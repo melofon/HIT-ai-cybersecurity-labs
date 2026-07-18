@@ -1,122 +1,244 @@
-# 🔧 **Assignment: Basic Anomaly Detection for Cybersecurity Logs**
+# 🔧 Lab 2 — Anomaly Detection for Cybersecurity Logs
 
-This assignment consists of **four parts**.
-Your goal is to build a small end-to-end anomaly detection pipeline for a cybersecurity-related dataset, analyze it, and visualize the detected anomalies in 2D.
+This lab compares two complementary anomaly-detection approaches:
 
----
+1. **Isolation Forest** — detects rare feature-space outliers.
+2. **Autoencoder with categorical embeddings** — learns normal behavioral patterns and flags events with high reconstruction error.
 
-## **0. How to run an example**
-
-* run `cd "labs/lab2 Anomaly Detection"` to navigate to the lab folder
-* build docker image with `docker build -t cybersec-jupyter .`
-* run `docker compose up` command to run the container
-* open jupyterlab with `http://127.0.0.1:8888/lab`
-
-## **1. Prepare a cybersecurity-related dataset**
-
-You may either **(A) generate synthetic data** (e.g., login events, network flows, process activity, DNS queries), or **(B) download a small real dataset** from the internet (e.g., a reduced sample from UNSW-NB15, CIC-IDS, KDD-based sets, Windows event logs, etc.).
-
-**Requirements:**
-
-* Your data must correspond to at least **one MITRE ATT&CK technique** (e.g.,
-  *T1078: Valid Accounts*,
-  *T1110: Brute Force*,
-  *T1059: Command-Line Execution*,
-  *T1041: Exfiltration Over C2 Channel*, etc.).
-* If you use an existing dataset, you **must downsample the attack cases** so that anomalies represent **a small minority** (1–5%). This is essential for Isolation Forest and similar unsupervised detectors.
-* Your final DataFrame must contain:
-
-  * at least **one time-based feature** (e.g., hour)
-  * at least **one numeric feature** (e.g., bytes, duration)
-  * at least **one categorical feature** (e.g., user, process, city, protocol)
-  * optional label column (normal vs attack) for evaluation only.
+The goal is not only to obtain predictions, but to compare what each model detects, where the models agree or disagree, and where human judgment is still required.
 
 ---
 
-## **2. Perform an exploratory data analysis (EDA)**
+## 0. How to run the lab
 
-Create a short EDA section (similar in style to the provided EDA notebook).
-Your EDA must include:
+From the repository root, run:
 
-1. Basic dataset statistics:
+```bash
+cd "labs/lab2 Anomaly Detection"
+docker compose up --build
+```
 
-   * number of rows
-   * number of features
-   * class distribution (normal vs anomalous, if available)
+When the container starts, open JupyterLab at:
 
-2. Visualizations (choose at least two):
+```text
+http://127.0.0.1:8888/lab
+```
 
-   * histograms of key numeric features
-   * countplots for categorical features
-   * scatter plots or pairplots
-   * time-based distribution (e.g., logins per hour)
+If Jupyter asks for a token, copy the complete URL printed in the terminal.
 
-3. A short (3–5 sentences) analytical summary describing the “normal” patterns in your dataset and what kinds of anomalies you expect to detect.
+After opening JupyterLab, navigate to the `work` directory.
 
----
+### Recommended notebook order
 
-## **3. Apply an anomaly detection model**
+1. `AnomalyDetectionComparison.ipynb` — **main Lab 2 notebook and required assignment**
+2. `IsolationForest.ipynb` — supporting Isolation Forest example
+3. `NetworkAttackAE.ipynb` — supporting autoencoder example using CICIDS data
+4. `AE.ipynb` — additional autoencoder example
+5. `EDA.ipynb` — exploratory data analysis example
+6. `FakerExamlple.ipynb` — synthetic-data generation example
 
-Use **Isolation Forest** as the primary method.
-If you want to experiment further, you may optionally try:
+Start with `AnomalyDetectionComparison.ipynb` and run:
 
-* **One-Class SVM**
-* **Local Outlier Factor (LOF)**
-* **Elliptic Envelope**
-* **Simple clustering-based anomaly detection** (e.g., k-Means distance threshold)
+```text
+Kernel → Restart Kernel and Run All Cells
+```
 
-Your anomaly detection step must include:
+The remaining notebooks are supporting examples unless your instructor explicitly assigns them.
 
-1. Preprocessing
+### Stop the environment
 
-   * Encode categorical features
-   * Scale numeric features (e.g., StandardScaler)
+Press `Ctrl+C` in the terminal running Docker, then run:
 
-2. Training
-
-   * Train Isolation Forest on the full dataset or only on normal samples
-   * Extract anomaly scores and predicted labels
-
-3. Evaluation
-
-   * Show a histogram of anomaly scores
-   * Report how many anomalies the model detected
-   * If the dataset includes ground truth labels, calculate simple metrics:
-     accuracy, precision, recall (optional)
+```bash
+docker compose down
+```
 
 ---
 
-## **4. Visualize anomalies on a 2D projection**
+## 1. Prepare a cybersecurity-related dataset
 
-Use a dimensionality-reduction method to project the dataset into 2D:
+Use either:
 
-Choose one:
+- synthetic events such as logins, network flows, process activity, DNS queries, or API calls; or
+- a small real dataset such as CIC-IDS, UNSW-NB15, KDD-based data, or Windows event logs.
 
-* **PCA** (recommended as baseline)
-* **t-SNE** (better separation, slower)
-* **UMAP** (good balance between speed and structure)
+### Requirements
 
-Your visualization must include:
+Your data must:
 
-1. A 2D scatter plot of your projected data
-2. Coloring by **anomaly score** or **anomaly label**
-3. A clear legend indicating normal vs anomalous points
-4. A short explanation (2–3 sentences) of what the plot tells you about the structure of the data
+- correspond to at least one MITRE ATT&CK technique, for example:
+  - **T1078 — Valid Accounts**
+  - **T1110 — Brute Force**
+  - **T1059 — Command and Scripting Interpreter**
+  - **T1041 — Exfiltration Over C2 Channel**
+- contain anomalies as a small minority, normally **1–5%**;
+- contain at least:
+  - one time-based feature;
+  - two numeric features;
+  - one categorical feature;
+  - an optional ground-truth label used only for evaluation.
 
-Example:
-
-> “Normal behavior forms a dense cluster in the central region, while anomalies appear as isolated points or small sparse groups at the edges of the projection.”
+Do not train the autoencoder on attack-labelled records. The model must learn a baseline from normal behavior.
 
 ---
 
-# ✔ **Deliverables**
+## 2. Exploratory data analysis
 
-Your final notebook must contain:
+Include:
 
-* Dataset generation or download code
-* EDA section
-* Anomaly detection with Isolation Forest (and optional second model)
-* Dimensionality reduction + 2D anomaly visualization
-* A short conclusion summarizing what your model was able to detect and why
+1. dataset dimensions and data types;
+2. class distribution, if labels exist;
+3. missing-value and infinite-value checks;
+4. at least two visualizations;
+5. a short description of expected normal behavior and likely anomalies.
 
+---
 
+## 3. Model A — Isolation Forest
+
+### Required steps
+
+1. Encode categorical features.
+2. Scale numeric features.
+3. Train an `IsolationForest`.
+4. Produce anomaly scores and binary predictions.
+5. Report:
+   - number and proportion of anomalies;
+   - score distribution;
+   - precision, recall, F1 and confusion matrix when labels exist.
+
+Isolation Forest is expected to work well for rare, isolated, numeric or tabular outliers.
+
+---
+
+## 4. Model B — Autoencoder with embeddings
+
+The second model must combine:
+
+- standardized numeric inputs;
+- trainable embeddings for categorical fields;
+- an encoder producing a low-dimensional latent representation;
+- decoder outputs that reconstruct numeric and categorical inputs.
+
+### Required steps
+
+1. Split the data into train, validation and test partitions.
+2. Train the autoencoder **only on normal training records**.
+3. Calculate an anomaly score combining:
+   - numeric reconstruction error;
+   - categorical reconstruction loss.
+4. Select the threshold using only normal validation data, for example the 95th or 99th percentile.
+5. Produce predictions and evaluation metrics.
+6. Extract the latent vectors as behavioral embeddings.
+
+The autoencoder is expected to detect complex deviations from learned normal behavior, including unusual combinations of otherwise common values.
+
+---
+
+## 5. Compare the two methods
+
+Create one comparison table containing at least:
+
+| Measure | Isolation Forest | Autoencoder + embeddings |
+|---|---:|---:|
+| Detected anomalies | | |
+| Precision | | |
+| Recall | | |
+| F1 score | | |
+| False positives | | |
+| False negatives | | |
+
+Also calculate:
+
+- **agreement rate** — percentage of records assigned the same label;
+- anomalies detected by both models;
+- anomalies detected only by Isolation Forest;
+- anomalies detected only by the autoencoder.
+
+Discuss at least three example records on which the models disagree.
+
+### How to interpret the results
+
+- **Precision** answers: Of all records flagged as anomalous, how many were actually attacks?
+- **Recall** answers: Of all real attacks, how many were detected?
+- **F1 score** balances precision and recall.
+- **False positives** create unnecessary analyst workload and alert fatigue.
+- **False negatives** represent attacks that the model missed.
+
+A model should not be declared universally better based on one run. State instead which model performed better **on this dataset and with the current parameter settings**.
+
+A typical conclusion may be:
+
+> Isolation Forest achieved better quantitative results in this experiment because it detected the same attacks with fewer false positives. The autoencoder remains useful because it models learned behavioral patterns and may detect more subtle combinations in larger or more complex datasets.
+
+---
+
+## 6. Visualize anomalies and latent behavior
+
+Produce:
+
+1. a 2D PCA, t-SNE or UMAP plot based on the preprocessed feature space;
+2. a second 2D plot based on the autoencoder latent representation;
+3. colors or markers showing:
+   - normal records;
+   - true attacks, when labels exist;
+   - Isolation Forest predictions;
+   - autoencoder predictions.
+
+Explain whether the latent representation separates behavioral anomalies more clearly than the original feature space.
+
+Do not interpret overlap in a 2D projection as proof that a model failed. Dimensionality reduction compresses information and can hide separation that exists in the original feature space.
+
+---
+
+## 7. Human–AI decision task
+
+For three high-scoring alerts:
+
+1. inspect the original record;
+2. identify the evidence supporting the alert;
+3. explain whether the alert should be accepted, challenged or escalated;
+4. identify possible false-positive explanations;
+5. connect the event to a MITRE ATT&CK technique.
+
+Remember:
+
+> AI detects patterns. Humans validate context and make the operational decision.
+
+---
+
+# ✔ Deliverables
+
+Submit one completed copy of `AnomalyDetectionComparison.ipynb` containing:
+
+- data preparation;
+- EDA;
+- Isolation Forest;
+- autoencoder with embeddings;
+- threshold selection;
+- quantitative comparison;
+- original-space and latent-space visualizations;
+- analysis of disagreements;
+- MITRE ATT&CK interpretation;
+- short conclusion.
+
+The conclusion must answer:
+
+1. Which model performed better and according to which measure?
+2. Which model produced fewer false positives?
+3. What types of anomalies were unique to each model?
+4. Did embeddings improve behavioral separation?
+5. Why should a SOC analyst avoid relying on one model alone?
+
+## Student checklist
+
+Before submission, confirm that:
+
+- [ ] all notebook cells run from top to bottom without errors;
+- [ ] both models were trained and evaluated;
+- [ ] the comparison table is complete;
+- [ ] false positives and false negatives were interpreted;
+- [ ] at least three disagreement cases were discussed;
+- [ ] the visualizations include readable labels and legends;
+- [ ] the conclusion refers to the actual results rather than making a general claim;
+- [ ] MITRE ATT&CK interpretation and the human decision task are included.

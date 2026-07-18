@@ -1,0 +1,13 @@
+lab2 Anomaly Detection/
+|-- README.md
+|-- Dockerfile
+|-- compose.yml
+|-- PROJECT_TREE.txt
+`-- work/
+    |-- AnomalyDetectionComparison.ipynb
+    |-- IsolationForest.ipynb
+    |-- NetworkAttackAE.ipynb
+    |-- AE.ipynb
+    |-- EDA.ipynb
+    |-- FakerExamlple.ipynb
+    `-- Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv
