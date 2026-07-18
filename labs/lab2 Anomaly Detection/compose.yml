@@ -1,9 +1,15 @@
 services:
   jupyterlab:
-    # https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: cybersec-jupyter
     container_name: jupyterlab-sec
     ports:
       - "8888:8888"
     volumes:
       - ./work:/home/jovyan/work
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=
+    restart: unless-stopped
