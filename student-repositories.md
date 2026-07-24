@@ -60,7 +60,7 @@ Repositories are organized by academic year and semester.
 | **6** | Itay Fisher | |
 | **7** | Itay Matana | |
 | **8** | Liav Turjeman | |
-| **9** | Shahar Larie | | https://github.com/shacharlaria/HIT-ai-cybersecurity-labs
+| **9** | Shahar Laria | https://github.com/shacharlaria/HIT-ai-cybersecurity-labs |
 
 ---
 
