@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "morpheus-lite"
+version = "0.2.0"
+description = "Educational governance-aware agentic SOC with optional Kafka, ONNX, Triton and NIM integrations"
+requires-python = ">=3.10"
+dependencies = [
+  "kafka-python>=2.0.2",
+  "pandas>=2.0",
+  "streamlit>=1.30",
+  "scikit-learn>=1.3",
+  "plotly>=5.18",
+  "requests>=2.31",
+  "PyYAML>=6.0",
+  "prometheus-client>=0.20"
+]
+
+[project.optional-dependencies]
+research = ["pyarrow>=15"]
+onnx = ["onnxruntime>=1.17"]
+gpu = ["onnxruntime-gpu>=1.17"]
+dev = ["pytest>=8", "ruff>=0.5"]
+
+[tool.setuptools]
+packages = ["morpheus_lite", "morpheus_lite.inference"]

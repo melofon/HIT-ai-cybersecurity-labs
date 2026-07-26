@@ -1,0 +1,10 @@
+raw_events: raw.logs
+alerts: morpheus.alerts
+investigations: agent.investigations
+explanations: agent.explanations
+rai_audit: audit.rai
+meta_ai: agent.meta_ai
+human_decisions: human.decisions
+soc_alerts: soc.alerts
+reflection_events: reflection.events
+dead_letter: dead.letter.events

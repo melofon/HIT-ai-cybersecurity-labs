@@ -1,0 +1,13 @@
+thresholds:
+  alert: 60
+  high_risk: 85
+
+actions:
+  high_risk: recommend_isolation_with_human_approval
+  medium_risk: increase_monitoring
+  low_risk: no_action
+
+requirements:
+  destructive_action_requires_human: true
+  minimum_evidence_for_high_risk: 2
+  minimum_confidence_for_autonomous_monitoring: 0.60

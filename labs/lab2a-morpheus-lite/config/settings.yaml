@@ -1,0 +1,32 @@
+app:
+  name: Morpheus Lite
+  mode: educational
+
+kafka:
+  bootstrap_servers: localhost:9092
+  auto_offset_reset: latest
+
+inference:
+  provider: ollama
+  model: llama3
+  timeout_seconds: 90
+  fallback_provider: deterministic
+  ollama_url: http://localhost:11434/api/generate
+  nim_base_url: http://localhost:8000/v1
+  nim_api_key_env: NIM_API_KEY
+  triton_url: http://localhost:8001
+  triton_model: anomaly
+  onnx_model_path: models/anomaly.onnx
+  onnx_execution_provider: auto
+
+compute:
+  backend: auto
+
+storage:
+  audit_jsonl: data/audit.jsonl
+  fingerprint_state: data/fingerprint_profiles.json
+  parquet_directory: exports
+
+observability:
+  enabled: true
+  prometheus_port: 9108
