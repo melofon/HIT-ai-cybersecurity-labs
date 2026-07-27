@@ -59,7 +59,7 @@ Repositories are organized by academic year and semester.
 | **5** | Boaz Attiya, Lotem Kimchi | https://github.com/Snafuzila/AI-CyberSecurity.git |
 | **6** | Itay Fisher | |
 | **7** | Itay Matana | |
-| **8** | Liav Turjeman | |
+| **8** | Liav Turjeman | https://github.com/liavt712-crypto |
 | **9** | Shahar Laria | https://github.com/shacharlaria/HIT-ai-cybersecurity-labs |
 
 ---
