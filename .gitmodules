@@ -1,0 +1,3 @@
+[submodule "labs/lab2b-morpheus-lite-high-load"]
+	path = labs/lab2b-morpheus-lite-high-load
+	url = https://github.com/akojukhov-bit/lab2b-morpheus-lite-high-load.git
