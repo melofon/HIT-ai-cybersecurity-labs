@@ -33,7 +33,7 @@ python -m venv .venv
 # activate the environment
 pip install -e ".[research,dev]"
 pytest -q
-docker compose up -d redpanda console
+docker compose up -d redpanda redpanda-console
 docker compose ps
 ```
 

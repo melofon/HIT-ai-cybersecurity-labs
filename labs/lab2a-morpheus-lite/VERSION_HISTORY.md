@@ -1,5 +1,17 @@
 # Version History
 
+## Meta-AI Orchestrator extension - branch `feature/meta-ai-orchestrator`
+
+Feature branch on top of the 1.0.0 baseline (see the freeze policy in the README). Event schemas change only additively.
+
+- Explainable Meta-AI Orchestrator (`morpheus_lite/orchestrator/`): shared data contract, Evidence Board, governance constraints G1–G6, Agent Agreement Engine, weighted aggregation, uncertainty decomposition, leave-one-out robustness, Meta-XAI explanations, decision reconstruction.
+- Cases gain `meta_orchestrator` and `legacy_status`; `status` is now set from the orchestrator's autonomy level.
+- New Kafka topic `agent.meta_orchestrator`; human decisions also record the orchestrator's action, confidence and agreement state.
+- Dashboard tabs: Meta-AI Orchestrator, Instructor Dashboard, Experiments; local simulation mode without Kafka.
+- Experiment framework (`run_experiments.py`): four conditions, five systems plus variants and ablations, thirteen metrics.
+- Detector and agent logic moved into `morpheus_lite/detection.py` and `morpheus_lite/agents.py` (re-exported from the original scripts).
+- Docs: corrected the Docker Compose service name (`redpanda-console`).
+
 ## Morpheus Lite Laboratory 1.0.0 - 2026-07-25
 
 Release type: Stable educational and research laboratory baseline.

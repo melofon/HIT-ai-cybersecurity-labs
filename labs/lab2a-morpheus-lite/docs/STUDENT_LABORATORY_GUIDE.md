@@ -59,7 +59,7 @@ Open five terminals in the project root.
 ### Terminal 1: Streaming platform
 
 ```bash
-docker compose up -d redpanda console
+docker compose up -d redpanda redpanda-console
 ```
 
 Confirm that the containers are running:

@@ -3,7 +3,7 @@ MORPHEUS LITE LABORATORY v1.0 - RUN ORDER
 Use one terminal per service.
 
 1. START REDPANDA AND CONSOLE
-   docker compose up -d redpanda console
+   docker compose up -d redpanda redpanda-console
 
 2. START TELEMETRY
    python telemetry_generator.py
@@ -27,6 +27,12 @@ Dashboard procedure:
    - Verify that Active alert, Human Decision Queue, and Case Details show the same alert_id.
    - Review evidence, RAI, XAI, and Meta-AI.
    - Record a human decision and justification.
+
+Meta-AI Orchestrator (branch feature/meta-ai-orchestrator):
+   - Without Kafka: in the dashboard sidebar choose Local simulation -> Generate cases.
+   - Tabs: Meta-AI Orchestrator, Instructor Dashboard, Experiments.
+   - Experiments from the command line:
+     python run_experiments.py
 
 Research export:
    python export_research_data.py
