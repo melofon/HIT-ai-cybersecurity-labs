@@ -90,7 +90,7 @@ Repositories are organized by academic year and semester.
 |-------|----------|------------|
 | **1** | Ofek Drori, David Voloshin | [OfekDr1/Cybersecurity-CTI-](https://github.com/OfekDr1/Cybersecurity-CTI-) |
 | **2** | Matan Elgrissi, Or Simovich | [SZ-io/HIT-AEC](https://github.com/SZ-io/HIT-AEC) |
-| **3** | Efim ?, Daniel Pinhas | [FimaMaker/AI-Cyber-Security](https://github.com/FimaMaker/AI-Cyber-Security) |
+| **3** | Efim Karant, Daniel Pinhas | [FimaMaker/AI-Cyber-Security](https://github.com/FimaMaker/AI-Cyber-Security) |
 | **4** | Michal Bazarsky | [michalbaz/HIT-cybersecurity-ai](https://github.com/michalbaz/HIT-cybersecurity-ai/) |
 
 
