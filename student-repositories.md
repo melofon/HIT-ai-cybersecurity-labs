@@ -92,6 +92,7 @@ Repositories are organized by academic year and semester.
 | **2** | Matan Elgrissi, Or Simovich | [SZ-io/HIT-AEC](https://github.com/SZ-io/HIT-AEC) |
 | **3** | Efim Karant, Daniel Pinhas | [FimaMaker/AI-Cyber-Security](https://github.com/FimaMaker/AI-Cyber-Security) |
 | **4** | Michal Bazarsky | [michalbaz/HIT-cybersecurity-ai](https://github.com/michalbaz/HIT-cybersecurity-ai/) |
+| **5** | Gilad Kogan, Shahar Sidon | [TheGamerKing777/Introduction_to_AI_Based_Cybersecurity](https://github.com/TheGamerKing777/Introduction_to_AI_Based_Cybersecurity) |
 
 
 ---
