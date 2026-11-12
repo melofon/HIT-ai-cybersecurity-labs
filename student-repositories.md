@@ -94,6 +94,7 @@ Repositories are organized by academic year and semester.
 | **4** | Michal Bazarsky | [michalbaz/HIT-cybersecurity-ai](https://github.com/michalbaz/HIT-cybersecurity-ai/) |
 | **5** | Gilad Kogan, Shahar Sidon | [TheGamerKing777/Introduction_to_AI_Based_Cybersecurity](https://github.com/TheGamerKing777/Introduction_to_AI_Based_Cybersecurity) |
 | **6** | Elizabetha Afonin | [lizaafo/CybersecurityLabs](https://github.com/lizaafo/CybersecurityLabs) | 
+| **7** | Jonathan Bronfman | [Jonik01/AI-Driven-Cybersecurity-Course](https://github.com/Jonik01/AI-Driven-Cybersecurity-Course) |
 
 
 ---
