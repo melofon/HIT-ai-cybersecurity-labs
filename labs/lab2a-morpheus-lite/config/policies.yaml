@@ -11,3 +11,22 @@ requirements:
   destructive_action_requires_human: true
   minimum_evidence_for_high_risk: 2
   minimum_confidence_for_autonomous_monitoring: 0.60
+
+# Meta-AI Orchestrator (see docs/META_AI_ORCHESTRATOR.md)
+meta_orchestrator:
+  agent_weights:
+    anomaly_detection: 1.0
+    behavioral_fingerprint: 0.9
+    rule_detector: 1.0
+    threat_hunter: 1.2
+    red_team: 0.9
+  # Minimum normalized support margin between the two leading actions;
+  # below it, agents on opposite sides of the escalation boundary are "split".
+  split_margin: 0.15
+  # Scale agent weights by profile maturity and by data/agent_reliability.json if present.
+  adaptive_weighting: true
+  reliability_file: data/agent_reliability.json
+  governance:
+    credential_compromise_min_sources: 2
+    corroborated_threat_min_sources: 3
+    minimum_data_quality_for_dismissal: 0.75

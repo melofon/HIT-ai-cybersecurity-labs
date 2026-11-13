@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-10-22T14:18:37.069857+00:00",
+  "conditions": {
+    "clean": "Mostly routine traffic with clear attacks.",
+    "conflicting": "Many benign anomalies that resemble attacks; agents are expected to disagree.",
+    "noisy": "Clean mix with sensor noise (\u00b125%) and 15% missing fields.",
+    "adversarial": "Attackers adapt to evade thresholds; some benign anomalies."
+  },
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "n_events": 400,
+  "calibration_seed": 999,
+  "systems": {
+    "soar_rules": "SOAR-style rule automation",
+    "isolated_ai": "Isolated predictive AI (Isolation Forest)",
+    "current_morpheus": "Current Morpheus Lite (RAI + Meta-AI review)",
+    "majority_vote": "Simple majority vote over agents",
+    "meta_orchestrator": "Meta-AI Orchestrator",
+    "meta_orchestrator_calibrated": "Meta-AI Orchestrator + calibrated agent trust",
+    "meta_orchestrator_prethreshold": "Meta-AI Orchestrator on all events (before alert threshold)",
+    "ablation_no_governance": "Ablation: orchestrator without governance",
+    "ablation_no_uncertainty": "Ablation: orchestrator without uncertainty weighting"
+  },
+  "metrics": {
+    "detection_rate": "Malicious cases escalated or contained (higher is better)",
+    "false_escalation_rate": "Benign cases escalated or contained (lower is better)",
+    "missed_threat_rate": "Malicious cases dismissed with DEFER (lower is better)",
+    "decision_accuracy": "Correct = threat->ESCALATE/ACT, benign->DEFER; REQUEST counts 0.5",
+    "f1": "F1 of escalation decisions",
+    "analyst_workload": "Share of all events routed to a human",
+    "unsafe_autonomous_act": "Containment executed without human approval",
+    "benign_containment_rate": "Benign cases where containment (ACT) was recommended",
+    "brier": "Brier score of the threat probability (lower is better)",
+    "ece": "Expected calibration error, 10 bins (lower is better)",
+    "consistency": "Same decision after \u00b13% measurement jitter",
+    "explanation_completeness": "Share of the six explanation questions answered",
+    "auditability": "Decision reproduced exactly from the stored record"
+  },
+  "agent_reliability": {
+    "anomaly_detection": 0.782,
+    "behavioral_fingerprint": 0.994,
+    "rule_detector": 0.882,
+    "threat_hunter": 1.087,
+    "red_team": 1.255
+  }
+}

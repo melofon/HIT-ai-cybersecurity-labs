@@ -1,0 +1,7 @@
+{
+  "anomaly_detection": 0.782,
+  "behavioral_fingerprint": 0.994,
+  "rule_detector": 0.882,
+  "threat_hunter": 1.087,
+  "red_team": 1.255
+}

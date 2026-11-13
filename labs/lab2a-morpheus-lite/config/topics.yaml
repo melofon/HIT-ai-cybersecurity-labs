@@ -4,6 +4,7 @@ investigations: agent.investigations
 explanations: agent.explanations
 rai_audit: audit.rai
 meta_ai: agent.meta_ai
+meta_orchestrator: agent.meta_orchestrator
 human_decisions: human.decisions
 soc_alerts: soc.alerts
 reflection_events: reflection.events

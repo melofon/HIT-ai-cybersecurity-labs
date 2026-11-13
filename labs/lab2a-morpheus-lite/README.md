@@ -82,7 +82,7 @@ Use a separate terminal for each Python service.
 
 ```bash
 # Terminal 1
-docker compose up -d redpanda console
+docker compose up -d redpanda redpanda-console
 
 # Terminal 2
 python telemetry_generator.py
@@ -103,6 +103,20 @@ Open:
 - Redpanda Console: `http://localhost:8080`
 
 In the dashboard, select **Fetch new cases from Kafka**.
+
+## Meta-AI Orchestrator extension
+
+Branch `feature/meta-ai-orchestrator` adds an Explainable Meta-AI Orchestrator on top of the existing agents. It normalizes every agent's recommendation onto a shared contract, applies governance rules first, analyzes agreement and disagreement, aggregates confidence-, evidence- and uncertainty-weighted support into one action (`DEFER`, `REQUEST_MORE_EVIDENCE`, `ESCALATE`, `ACT`), and explains the decision, keeping dissent visible. Full design and results: [docs/META_AI_ORCHESTRATOR.md](docs/META_AI_ORCHESTRATOR.md).
+
+```bash
+# Dashboard without Kafka: choose "Local simulation" in the sidebar
+streamlit run dashboard.py
+
+# Comparison experiments (current Morpheus Lite vs orchestrator and baselines)
+python run_experiments.py
+```
+
+The dashboard adds three tabs — **Meta-AI Orchestrator**, **Instructor Dashboard** and **Experiments** — next to the existing SOC Workbench.
 
 ## Student workflow
 
@@ -135,6 +149,7 @@ All dashboard panels are synchronized through `st.session_state.selected_alert_i
 | `agent.explanations` | XAI outputs |
 | `audit.rai` | RAI policy records |
 | `agent.meta_ai` | Meta-AI reviews |
+| `agent.meta_orchestrator` | Meta-AI Orchestrator decision records |
 | `human.decisions` | Analyst decisions and justifications |
 | `soc.alerts` | Optional SOC-facing output |
 | `reflection.events` | Optional learning reflections |
@@ -177,6 +192,7 @@ Generated research records may include alert identifiers, model and agent output
 ## Documentation
 
 - [Architecture](docs/ARCHITECTURE.md)
+- [Meta-AI Orchestrator](docs/META_AI_ORCHESTRATOR.md)
 - [Student Laboratory Guide](docs/STUDENT_LABORATORY_GUIDE.md)
 - [Instructor Quick Start](docs/INSTRUCTOR_QUICK_START.md)
 - [Laboratory Release Manifest](docs/LABORATORY_RELEASE.md)
