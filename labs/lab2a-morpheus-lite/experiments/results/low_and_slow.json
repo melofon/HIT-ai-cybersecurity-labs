@@ -1,0 +1,101 @@
+{
+  "low_and_slow": {
+    "events": 309,
+    "alert_rate": 1.0,
+    "mean_risk_score": 80.24271844660194,
+    "detection_by_system": {
+      "soar_rules": 0.003236245954692557,
+      "isolated_ai": 1.0,
+      "current_morpheus": 0.04854368932038835,
+      "majority_vote": 0.3333333333333333,
+      "meta_orchestrator": 0.3948220064724919
+    },
+    "orchestrator_outcomes": {
+      "REQUEST_MORE_EVIDENCE": 0.599,
+      "ESCALATE": 0.395,
+      "DEFER": 0.006
+    },
+    "orchestrator_states": {
+      "majority": 0.929,
+      "split": 0.061,
+      "policy_override": 0.01
+    },
+    "agent_votes_alerted": {
+      "anomaly_detection": {
+        "REQUEST_MORE_EVIDENCE": 300,
+        "ESCALATE": 9
+      },
+      "behavioral_fingerprint": {
+        "ESCALATE": 209,
+        "REQUEST_MORE_EVIDENCE": 100
+      },
+      "rule_detector": {
+        "DEFER": 289,
+        "REQUEST_MORE_EVIDENCE": 19,
+        "ESCALATE": 1
+      },
+      "threat_hunter": {
+        "REQUEST_MORE_EVIDENCE": 136,
+        "ESCALATE": 170,
+        "ACT": 3
+      },
+      "red_team": {
+        "REQUEST_MORE_EVIDENCE": 54,
+        "DEFER": 45
+      }
+    },
+    "independent_sources_alerted": {
+      "0": 45,
+      "1": 138,
+      "2": 123,
+      "3": 3
+    }
+  },
+  "evasive_stuffing": {
+    "events": 147,
+    "alert_rate": 0.9931972789115646,
+    "mean_risk_score": 79.59183673469387,
+    "detection_by_system": {
+      "soar_rules": 0.0,
+      "isolated_ai": 0.24489795918367346,
+      "current_morpheus": 0.0,
+      "majority_vote": 0.36054421768707484,
+      "meta_orchestrator": 0.47619047619047616
+    },
+    "orchestrator_outcomes": {
+      "ESCALATE": 0.476,
+      "REQUEST_MORE_EVIDENCE": 0.32,
+      "DEFER": 0.204
+    },
+    "orchestrator_states": {
+      "majority": 0.719,
+      "split": 0.281
+    },
+    "agent_votes_alerted": {
+      "anomaly_detection": {
+        "REQUEST_MORE_EVIDENCE": 36,
+        "DEFER": 110
+      },
+      "behavioral_fingerprint": {
+        "ESCALATE": 143,
+        "REQUEST_MORE_EVIDENCE": 3
+      },
+      "rule_detector": {
+        "REQUEST_MORE_EVIDENCE": 70,
+        "DEFER": 76
+      },
+      "threat_hunter": {
+        "ESCALATE": 70,
+        "REQUEST_MORE_EVIDENCE": 76
+      },
+      "red_team": {
+        "DEFER": 3
+      }
+    },
+    "independent_sources_alerted": {
+      "0": 4,
+      "1": 72,
+      "2": 70
+    }
+  }
+}

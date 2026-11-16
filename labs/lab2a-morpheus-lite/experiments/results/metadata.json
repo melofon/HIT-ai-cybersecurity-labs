@@ -1,5 +1,40 @@
 {
-  "generated_at": "2026-10-22T14:18:37.069857+00:00",
+  "generated_at": "2026-11-16T18:40:03.534645+00:00",
+  "run_type": "official held-out evaluation",
+  "seed_protocol": {
+    "development": [
+      1,
+      2,
+      3
+    ],
+    "calibration": [
+      999
+    ],
+    "evaluation": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "evaluated": [
+      101,
+      102,
+      103,
+      104,
+      105
+    ],
+    "calibration_used": [
+      999
+    ],
+    "calibration_conditions": [
+      "clean",
+      "conflicting"
+    ],
+    "official": true,
+    "development_seeds_used": [],
+    "unlisted_seeds_used": []
+  },
   "conditions": {
     "clean": "Mostly routine traffic with clear attacks.",
     "conflicting": "Many benign anomalies that resemble attacks; agents are expected to disagree.",
@@ -7,12 +42,47 @@
     "adversarial": "Attackers adapt to evade thresholds; some benign anomalies."
   },
   "seeds": [
-    1,
-    2,
-    3
+    101,
+    102,
+    103,
+    104,
+    105
   ],
   "n_events": 400,
-  "calibration_seed": 999,
+  "design": {
+    "orchestrator_version": "1.0.0",
+    "git_commit": "562ba2aaf2613e49e80f1aebe943b91d71203b71",
+    "uncommitted_changes": false,
+    "config_sha256": "ec808ff42506c75226d60e5e8c4b3328753750382930c980a7c2b2b08e5caab8",
+    "config": {
+      "orchestrator": {
+        "agent_weights": {
+          "anomaly_detection": 1.0,
+          "behavioral_fingerprint": 0.9,
+          "rule_detector": 1.0,
+          "threat_hunter": 1.2,
+          "red_team": 0.9
+        },
+        "split_margin": 0.15,
+        "adaptive_weighting": true,
+        "reliability_file": "data/agent_reliability.json",
+        "use_governance": true,
+        "use_uncertainty": true
+      },
+      "governance": {
+        "destructive_action_requires_human": true,
+        "minimum_evidence_for_high_risk": 2,
+        "minimum_confidence_for_autonomy": 0.6,
+        "credential_compromise_min_sources": 2,
+        "corroborated_threat_min_sources": 3,
+        "minimum_data_quality_for_dismissal": 0.75
+      },
+      "thresholds": {
+        "alert": 60,
+        "high_risk": 85
+      }
+    }
+  },
   "systems": {
     "soar_rules": "SOAR-style rule automation",
     "isolated_ai": "Isolated predictive AI (Isolation Forest)",
@@ -37,7 +107,10 @@
     "ece": "Expected calibration error, 10 bins (lower is better)",
     "consistency": "Same decision after \u00b13% measurement jitter",
     "explanation_completeness": "Share of the six explanation questions answered",
-    "auditability": "Decision reproduced exactly from the stored record"
+    "auditability": "Decision reproduced exactly from the stored record",
+    "governance_compliance": "Decision satisfies governance rules G1\u2013G5 for the case's evidence (G6 needs a confidence)",
+    "agent_agreement_rate": "Share of voting agents whose recommendation equals the decision (alerted cases)",
+    "loo_robustness": "Decision unchanged when any single voting agent is removed (orchestrator only)"
   },
   "agent_reliability": {
     "anomaly_detection": 0.782,

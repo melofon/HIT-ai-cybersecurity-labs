@@ -112,9 +112,13 @@ Branch `feature/meta-ai-orchestrator` adds an Explainable Meta-AI Orchestrator o
 # Dashboard without Kafka: choose "Local simulation" in the sidebar
 streamlit run dashboard.py
 
-# Comparison experiments (current Morpheus Lite vs orchestrator and baselines)
+# Official held-out evaluation, sensitivity analysis, frozen release
 python run_experiments.py
+python run_sensitivity.py
+python freeze_release.py
 ```
+
+Official results and the evaluation protocol: `experiments/releases/meta-ai-orchestrator-eval-v1.0/README.md`.
 
 The dashboard adds three tabs — **Meta-AI Orchestrator**, **Instructor Dashboard** and **Experiments** — next to the existing SOC Workbench.
 

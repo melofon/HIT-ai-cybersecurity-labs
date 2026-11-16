@@ -1,5 +1,15 @@
 # Version History
 
+## Meta-AI Orchestrator evaluation v1.0 - tag `meta-ai-orchestrator-eval-v1.0`
+
+Follows the supervisor's review of the first evaluation.
+
+- Three disjoint seed sets: development (1–3), calibration (999), held-out evaluation (101–105). Only held-out runs are official; each run records the code commit and a configuration hash.
+- New metrics: governance compliance, agent agreement rate, leave-one-out robustness.
+- Sensitivity analysis on development seeds (`run_sensitivity.py`) and failure-case analysis with a low-and-slow deep dive.
+- Frozen release package (`freeze_release.py`) in `experiments/releases/meta-ai-orchestrator-eval-v1.0/`.
+- The earlier results on seeds 1–3 are superseded; the fingerprint finding is reported as a case study, with the corrected count (32 of 37 dismissed).
+
 ## Meta-AI Orchestrator extension - branch `feature/meta-ai-orchestrator`
 
 Feature branch on top of the 1.0.0 baseline (see the freeze policy in the README). Event schemas change only additively.

@@ -31,8 +31,10 @@ Dashboard procedure:
 Meta-AI Orchestrator (branch feature/meta-ai-orchestrator):
    - Without Kafka: in the dashboard sidebar choose Local simulation -> Generate cases.
    - Tabs: Meta-AI Orchestrator, Instructor Dashboard, Experiments.
-   - Experiments from the command line:
+   - Official held-out evaluation, sensitivity analysis, frozen release:
      python run_experiments.py
+     python run_sensitivity.py
+     python freeze_release.py
 
 Research export:
    python export_research_data.py
