@@ -372,7 +372,8 @@ def design_fingerprint(policies: dict[str, Any]) -> dict[str, Any]:
     return {
         "orchestrator_version": ORCHESTRATOR_VERSION,
         "git_commit": git("rev-parse", "HEAD") or None,
-        "uncommitted_changes": bool(git("status", "--porcelain", "--", ".")),
+        # Result folders are outputs, not code: changes there do not make a run irreproducible.
+        "uncommitted_changes": bool(git("status", "--porcelain", "--", ".", ":(exclude)experiments")),
         "config_sha256": hashlib.sha256(json.dumps(config, sort_keys=True, default=str).encode()).hexdigest(),
         "config": config,
     }
