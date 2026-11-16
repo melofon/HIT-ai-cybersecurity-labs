@@ -21,7 +21,8 @@ from morpheus_lite.scenarios import CONDITIONS
 from morpheus_lite.storage import AuditStore
 
 settings = load_settings()
-RESULTS_DIR = "experiments/results"
+RESULTS_DIR = "experiments/results"  # official held-out evaluation (python run_experiments.py)
+DEV_RESULTS_DIR = "experiments/dev_results"  # runs started from the dashboard
 st.set_page_config(page_title="Morpheus Lite Agentic SOC", layout="wide")
 st.title("Morpheus Lite Agentic SOC Dashboard")
 st.caption("Kafka -> Detection -> Agent Orchestration -> RAI -> Meta-AI Orchestrator -> Human Decision")
@@ -32,8 +33,8 @@ if "decisions" not in st.session_state:
     st.session_state.decisions = {}
 if "selected_alert_id" not in st.session_state:
     st.session_state.selected_alert_id = None
-if "experiment_results" not in st.session_state:
-    st.session_state.experiment_results = load_results(RESULTS_DIR)
+if "experiment_source" not in st.session_state:
+    st.session_state.experiment_source = RESULTS_DIR
 
 DECISION_OPTIONS = [
     "approve",
@@ -153,10 +154,9 @@ def sync_queue_to_active(widget_key: str) -> None:
 
 def run_experiment_from_ui(n_events: int, seeds: list[int], conditions: list[str]) -> None:
     progress = st.progress(0.0, text="Starting experiment")
-    st.session_state.experiment_results = None
-    run_experiments(settings.policies, conditions=conditions, seeds=seeds, n_events=n_events, output_dir=RESULTS_DIR,
+    run_experiments(settings.policies, conditions=conditions, seeds=seeds, n_events=n_events, output_dir=DEV_RESULTS_DIR,
                     progress=lambda message, fraction: progress.progress(min(fraction, 1.0), text=message))
-    st.session_state.experiment_results = load_results(RESULTS_DIR)
+    st.session_state.experiment_source = DEV_RESULTS_DIR
     st.rerun()
 
 
@@ -420,4 +420,9 @@ with tab_instructor:
     render_instructor(cases, st.session_state.decisions)
 
 with tab_experiments:
-    render_experiments(st.session_state.experiment_results, run_experiment_from_ui)
+    sources = {"Official held-out evaluation": RESULTS_DIR, "Latest development run (not official)": DEV_RESULTS_DIR}
+    labels = list(sources)
+    chosen = st.radio("Results", labels, horizontal=True,
+                      index=labels.index(next(k for k, v in sources.items() if v == st.session_state.experiment_source)))
+    st.session_state.experiment_source = sources[chosen]
+    render_experiments(load_results(sources[chosen]), run_experiment_from_ui)

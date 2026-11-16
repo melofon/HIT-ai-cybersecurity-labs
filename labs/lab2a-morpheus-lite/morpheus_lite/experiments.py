@@ -6,8 +6,10 @@ case, so differences come only from the decision logic.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import random
+import subprocess
 import tempfile
 from collections import Counter
 from collections.abc import Callable
@@ -19,6 +21,7 @@ import numpy as np
 import pandas as pd
 
 from .agents import build_case
+from .config import ROOT
 from .detection import (
     build_alert,
     extract_features,
@@ -37,7 +40,12 @@ from .orchestrator.contract import (
     Action,
     clamp,
 )
-from .orchestrator.orchestrator import load_config
+from .orchestrator.governance import GovernanceResult, evaluate_pre, governance_config
+from .orchestrator.orchestrator import (
+    ORCHESTRATOR_VERSION,
+    load_config,
+    summarize_evidence,
+)
 from .scenarios import CONDITIONS, generate, perturb, warmup_events
 
 SYSTEMS = {
@@ -52,6 +60,16 @@ SYSTEMS = {
     "ablation_no_uncertainty": "Ablation: orchestrator without uncertainty weighting",
 }
 PRIMARY_SYSTEMS = ["soar_rules", "isolated_ai", "current_morpheus", "majority_vote", "meta_orchestrator"]
+
+# Three disjoint seed sets. Development seeds were seen while the design was tuned, so
+# results on them are never reported as official. Calibration seeds are used only to
+# learn agent trust. Evaluation seeds are held out and run once on the frozen design.
+SEED_PROTOCOL = {
+    "development": [1, 2, 3],
+    "calibration": [999],
+    "evaluation": [101, 102, 103, 104, 105],
+}
+CALIBRATION_CONDITIONS = ["clean", "conflicting"]
 
 # Fraction of the six explanation questions each baseline answers (see docs/META_AI_ORCHESTRATOR.md).
 STATIC_COMPLETENESS = {"soar_rules": 2 / 6, "isolated_ai": 1 / 6, "current_morpheus": 4 / 6, "majority_vote": 2 / 6}
@@ -70,6 +88,9 @@ METRICS = {
     "consistency": "Same decision after ±3% measurement jitter",
     "explanation_completeness": "Share of the six explanation questions answered",
     "auditability": "Decision reproduced exactly from the stored record",
+    "governance_compliance": "Decision satisfies governance rules G1–G5 for the case's evidence (G6 needs a confidence)",
+    "agent_agreement_rate": "Share of voting agents whose recommendation equals the decision (alerted cases)",
+    "loo_robustness": "Decision unchanged when any single voting agent is removed (orchestrator only)",
 }
 
 
@@ -82,6 +103,7 @@ class ExperimentPipeline:
         self.fingerprints = FingerprintStore(Path(self._tmp.name) / "profiles.json")
         self.inference = ResilientInference({"provider": "deterministic", "model": "rule-based-explainer"})
         self.meta_agent = MetaAIAgent()
+        self.gov_config = governance_config(policies)
         base = load_config(policies)
         base["adaptive_weighting"] = True
         base["reliability_file"] = None
@@ -137,6 +159,17 @@ class ExperimentPipeline:
                 out[name] = _row(Action.DEFER, risk_p, False, None)
             out["majority_vote"] = _row(Action.DEFER, risk_p, False, None)
 
+        _, evidence = summarize_evidence(alert)
+        gov = evaluate_pre(evidence, self.gov_config)
+        for name, row in out.items():
+            _annotate(row, gov, voters if alerted or name in ("soar_rules", "isolated_ai", "meta_orchestrator_prethreshold") else [])
+        out["meta_orchestrator"]["detail"] = json.dumps({
+            "independent_families": evidence["independent_families"],
+            "data_quality": evidence["data_quality"],
+            "features": {k: event.get(k) for k in ("user", "event_type", "failed_logins", "bytes_out", "process_count", "country", "src_ip")},
+            "headline": main["explanation"]["headline"],
+        })
+
         # Agent-level votes, used for trust calibration.
         out["_agents"] = {a["agent_id"]: a["recommended_action"] for a in main["agents"] if a["voting"] and a["recommended_action"]}
         out["_meta"] = {"risk_score": score, "alerted": alerted}
@@ -150,16 +183,31 @@ class ExperimentPipeline:
 
 
 def _row(action: Action, p: float, human: bool, completeness: float | None, *, autonomous_act: bool = False,
-         state: str | None = None, audit: float | None = None) -> dict[str, Any]:
+         state: str | None = None, audit: float | None = None, robust: float | None = None) -> dict[str, Any]:
     return {"action": action.value, "p_malicious": round(float(p), 4), "human": bool(human), "completeness": completeness,
-            "autonomous_act": autonomous_act, "state": state, "audit": audit}
+            "autonomous_act": autonomous_act, "state": state, "audit": audit, "robust": robust}
 
 
 def _orchestrator_row(record: dict[str, Any]) -> dict[str, Any]:
     completeness = record["explanation"]["completeness"]
     return _row(Action(record["decision"]["action"]), record["decision"]["threat_probability"],
                 record["autonomy"]["level"] != "autonomous", sum(completeness.values()) / len(completeness),
-                state=record["agreement"]["state"], audit=float(reconstruct(record)["matches"]))
+                state=record["agreement"]["state"], audit=float(reconstruct(record)["matches"]),
+                robust=float(record["robustness"]["robust"]))
+
+
+def governance_compliant(action: Action, autonomous_act: bool, gov: GovernanceResult) -> bool:
+    """G1–G5 checked against the case's evidence: no blocked action, no action below the floor,
+    no containment without a human. G6 is left out because baselines report no confidence."""
+    if action.value in gov.blocked or autonomous_act:
+        return False
+    return gov.floor is None or action.severity >= Action(gov.floor).severity
+
+
+def _annotate(row: dict[str, Any], gov: GovernanceResult, voters: list[Action]) -> None:
+    action = Action(row["action"])
+    row["compliant"] = governance_compliant(action, row["autonomous_act"], gov)
+    row["agreement"] = sum(v == action for v in voters) / len(voters) if voters else None
 
 
 def _majority_row(voters: list[Action]) -> dict[str, Any]:
@@ -195,9 +243,10 @@ def run_condition(policies: dict[str, Any], condition: str, seed: int, n_events:
                     "scenario": event["scenario"], "label": event["label"],
                     "malicious": event["label"] == "suspicious",
                     "risk_score": original["_meta"]["risk_score"], "alerted": original["_meta"]["alerted"],
-                    "system": system, **original[system],
+                    "system": system, **{k: v for k, v in original[system].items() if k != "detail"},
                     "consistent": original[system]["action"] == perturbed[system]["action"],
                     "agent_votes": json.dumps(original["_agents"]) if system == "meta_orchestrator" else None,
+                    "detail": original[system].get("detail"),
                 })
     finally:
         pipeline.close()
@@ -246,6 +295,9 @@ def compute_metrics(df: pd.DataFrame) -> dict[str, float]:
     p = df["p_malicious"].to_numpy(dtype=float)
     completeness = df["completeness"].dropna()
     audit = df["audit"].dropna()
+    agreement = pd.to_numeric(df["agreement"], errors="coerce").dropna()
+    robust = pd.to_numeric(df["robust"], errors="coerce").dropna()
+    consistent = pd.to_numeric(df["consistent"], errors="coerce").dropna()
     return {
         "detection_rate": recall,
         "false_escalation_rate": fp / ben.sum() if ben.sum() else 0.0,
@@ -257,9 +309,12 @@ def compute_metrics(df: pd.DataFrame) -> dict[str, float]:
         "benign_containment_rate": ((df["action"] == "ACT").to_numpy() & ben).sum() / ben.sum() if ben.sum() else 0.0,
         "brier": float(np.mean((p - y) ** 2)),
         "ece": _ece(p, y.astype(float)),
-        "consistency": float(df["consistent"].mean()),
+        "consistency": float(consistent.mean()) if len(consistent) else float("nan"),
         "explanation_completeness": float(completeness.mean()) if len(completeness) else float("nan"),
         "auditability": float(audit.mean()) if len(audit) else float("nan"),
+        "governance_compliance": float(df["compliant"].astype(float).mean()),
+        "agent_agreement_rate": float(agreement.mean()) if len(agreement) else float("nan"),
+        "loo_robustness": float(robust.mean()) if len(robust) else float("nan"),
     }
 
 
@@ -297,22 +352,52 @@ def agreement_profile(per_event: pd.DataFrame) -> pd.DataFrame:
             .groupby(level=[0, 1]).transform(lambda s: s / s.sum()).rename("share").reset_index())
 
 
+def seed_roles(seeds: list[int]) -> dict[str, Any]:
+    """Classify a run: official only when every seed is a held-out evaluation seed."""
+    dev = sorted(set(seeds) & set(SEED_PROTOCOL["development"]))
+    unknown = sorted(set(seeds) - set(SEED_PROTOCOL["evaluation"]) - set(SEED_PROTOCOL["development"]))
+    official = not dev and not unknown
+    return {"official": official, "development_seeds_used": dev, "unlisted_seeds_used": unknown}
+
+
+def design_fingerprint(policies: dict[str, Any]) -> dict[str, Any]:
+    """What was frozen: code commit, uncommitted changes, and a hash of the decision configuration."""
+    def git(*args: str) -> str:
+        try:
+            return subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=True).stdout.strip()
+        except (OSError, subprocess.CalledProcessError):
+            return ""
+    config = {"orchestrator": load_config(policies), "governance": governance_config(policies),
+              "thresholds": policies.get("thresholds", {})}
+    return {
+        "orchestrator_version": ORCHESTRATOR_VERSION,
+        "git_commit": git("rev-parse", "HEAD") or None,
+        "uncommitted_changes": bool(git("status", "--porcelain", "--", ".")),
+        "config_sha256": hashlib.sha256(json.dumps(config, sort_keys=True, default=str).encode()).hexdigest(),
+        "config": config,
+    }
+
+
 def run_experiments(
     policies: dict[str, Any],
     *,
     conditions: list[str] | None = None,
     seeds: list[int] | None = None,
     n_events: int = 400,
-    calibration_seed: int = 999,
+    calibration_seeds: list[int] | None = None,
     output_dir: str | Path | None = "experiments/results",
     progress: Callable[[str, float], None] | None = None,
 ) -> dict[str, Any]:
     conditions = conditions or list(CONDITIONS)
-    seeds = seeds or [1, 2, 3]
+    seeds = seeds or list(SEED_PROTOCOL["evaluation"])
+    calibration_seeds = calibration_seeds or list(SEED_PROTOCOL["calibration"])
+    if set(calibration_seeds) & set(seeds):
+        raise ValueError("Calibration seeds must not overlap the evaluated seeds.")
+    roles = seed_roles(seeds)
     report = progress or (lambda message, fraction: None)
 
-    report("Calibrating agent trust on a held-out seed", 0.0)
-    calibration = pd.concat([run_condition(policies, c, calibration_seed, n_events) for c in ("clean", "conflicting")])
+    report("Calibrating agent trust on the calibration seeds", 0.0)
+    calibration = pd.concat([run_condition(policies, c, s, n_events) for s in calibration_seeds for c in CALIBRATION_CONDITIONS])
     reliability = calibrate_reliability(calibration)
 
     frames = []
@@ -325,8 +410,12 @@ def run_experiments(
     profile = agreement_profile(per_event)
     metadata = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
+        "run_type": "official held-out evaluation" if roles["official"] else "development run (not official)",
+        "seed_protocol": {**SEED_PROTOCOL, "evaluated": seeds, "calibration_used": calibration_seeds,
+                          "calibration_conditions": CALIBRATION_CONDITIONS, **roles},
         "conditions": {c: CONDITIONS[c]["description"] for c in conditions},
-        "seeds": seeds, "n_events": n_events, "calibration_seed": calibration_seed,
+        "seeds": seeds, "n_events": n_events,
+        "design": design_fingerprint(policies),
         "systems": SYSTEMS, "metrics": METRICS, "agent_reliability": reliability,
     }
     if output_dir:
@@ -344,12 +433,17 @@ def run_experiments(
 
 def render_report(summary: pd.DataFrame, profile: pd.DataFrame, metadata: dict[str, Any]) -> str:
     headline = ["detection_rate", "false_escalation_rate", "missed_threat_rate", "decision_accuracy", "analyst_workload",
-                "unsafe_autonomous_act", "brier", "consistency", "explanation_completeness"]
+                "brier", "consistency", "explanation_completeness", "governance_compliance", "agent_agreement_rate",
+                "loo_robustness"]
     lines = [
         "# Experimental Comparison: Current Morpheus Lite vs Meta-AI Orchestrator",
         "",
-        f"Generated {metadata['generated_at']} — {metadata['n_events']} events per run, seeds {metadata['seeds']} "
-        f"(mean ± std across seeds). Agent trust calibrated on held-out seed {metadata['calibration_seed']}.",
+        f"**{metadata['run_type'].capitalize()}.** Generated {metadata['generated_at']} — {metadata['n_events']} events per run, "
+        f"seeds {metadata['seeds']} (mean ± std across seeds). Agent trust calibrated on seeds "
+        f"{metadata['seed_protocol']['calibration_used']}; development seeds {SEED_PROTOCOL['development']} are never reported "
+        f"as official results. Code commit `{metadata['design']['git_commit']}`"
+        + (" with uncommitted changes" if metadata["design"]["uncommitted_changes"] else "")
+        + f", configuration hash `{metadata['design']['config_sha256'][:12]}`.",
         "",
         "## Conditions",
         "",

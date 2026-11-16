@@ -29,6 +29,7 @@ from .contract import (
     CONTRACT_VERSION,
     Action,
     AgentRecommendation,
+    EvidenceItem,
     clamp,
 )
 from .evidence import (
@@ -233,6 +234,19 @@ def aggregate(
     return result
 
 
+def summarize_evidence(alert: dict[str, Any]) -> tuple[list[EvidenceItem], dict[str, Any]]:
+    """Evidence Board for an alert, plus the summary the governance rules read."""
+    event = alert.get("source_event", {})
+    items = extract_evidence(alert)
+    auth = next((i for i in items if i.evidence_id == "E-AUTH-1"), None)
+    return items, {
+        "independent_families": independent_families(items),
+        "data_quality": data_quality(event),
+        "missing_fields": missing_fields(event),
+        "credential_compromise": auth is not None and auth.strength >= 0.5,
+    }
+
+
 class MetaAIOrchestrator:
     name = "Meta-AI Orchestrator"
 
@@ -267,18 +281,10 @@ class MetaAIOrchestrator:
 
     def orchestrate(self, case: dict[str, Any]) -> dict[str, Any]:
         alert = case["alert"]
-        event = alert.get("source_event", {})
         # Collect + Normalize
-        items = extract_evidence(alert)
+        items, evidence_summary = summarize_evidence(alert)
         board = {item.evidence_id: item for item in items}
-        dq = data_quality(event)
-        independent = independent_families(items)
-        evidence_summary = {
-            "independent_families": independent,
-            "data_quality": dq,
-            "missing_fields": missing_fields(event),
-            "credential_compromise": board.get("E-AUTH-1") is not None and board["E-AUTH-1"].strength >= 0.5,
-        }
+        dq, independent = evidence_summary["data_quality"], evidence_summary["independent_families"]
         recs = collect_recommendations(case, board, dq, independent, self.policies)
         weights = self.weights_for(case)
         coherence = xai_coherence(case)

@@ -337,10 +337,17 @@ def render_instructor(cases: list[dict[str, Any]], decisions: dict[str, str]) ->
 # ---------------------------------------------------------------------------
 
 def load_results(directory: str | Path) -> dict[str, Any] | None:
-    path = Path(directory)
+    from .config import ROOT
+
+    path = Path(directory) if Path(directory).is_absolute() else ROOT / directory
     if not (path / "summary.csv").exists():
         return None
+    optional = {name: (path / name).read_text(encoding="utf-8") if (path / name).exists() else None
+                for name in ("failure_analysis.md",)}
+    sensitivity = ROOT / "experiments" / "sensitivity" / "report.md"
     return {
+        "failure_analysis": optional["failure_analysis.md"],
+        "sensitivity": sensitivity.read_text(encoding="utf-8") if sensitivity.exists() else None,
         "summary": pd.read_csv(path / "summary.csv"),
         "agreement_profile": pd.read_csv(path / "agreement_profile.csv"),
         "per_event": pd.read_csv(path / "per_event.csv") if (path / "per_event.csv").exists() else None,
@@ -378,10 +385,10 @@ def render_experiments(results: dict[str, Any] | None, run_callback) -> None:
     with st.expander("Run a new experiment", expanded=results is None):
         c1, c2, c3 = st.columns(3)
         n_events = c1.slider("Events per run", 100, 1000, 400, step=50)
-        seeds = c2.multiselect("Seeds", [1, 2, 3, 4, 5], default=[1, 2, 3])
+        seeds = c2.multiselect("Development seeds", [1, 2, 3], default=[1, 2, 3])
         conditions = c3.multiselect("Conditions", list(CONDITIONS), default=list(CONDITIONS))
-        st.caption("Each run trains the detector, warms up fingerprints and pushes every labelled event through all agents. "
-                   "Agent trust is calibrated on a separate held-out seed (999).")
+        st.caption("Runs started here are development runs on seeds 1–3 and never replace the official results. "
+                   "The official held-out evaluation (seeds 101–105) is run with `python run_experiments.py` on committed code.")
         if st.button("Run experiment", type="primary", disabled=not seeds or not conditions):
             run_callback(n_events, seeds, conditions)
 
@@ -390,8 +397,11 @@ def render_experiments(results: dict[str, Any] | None, run_callback) -> None:
         return
     summary = results["summary"]
     meta = results["metadata"]
-    st.caption(f"Results from {meta['generated_at'][:19].replace('T', ' ')} UTC · {meta['n_events']} events per run · seeds {meta['seeds']} · "
-               "bars show the mean across seeds, whiskers ± 1 std.")
+    run_type = meta.get("run_type", "development run (not official)")
+    (st.success if run_type.startswith("official") else st.warning)(
+        f"{run_type.capitalize()} · {meta['generated_at'][:19].replace('T', ' ')} UTC · {meta['n_events']} events per run · "
+        f"seeds {meta['seeds']} · commit {str(meta.get('design', {}).get('git_commit') or 'unknown')[:10]}")
+    st.caption("Bars show the mean across seeds, whiskers ± 1 std.")
 
     main = summary[summary["system"] == "meta_orchestrator"]
     legacy = summary[summary["system"] == "current_morpheus"]
@@ -458,3 +468,9 @@ def render_experiments(results: dict[str, Any] | None, run_callback) -> None:
     st.download_button("Download summary (CSV)", summary.to_csv(index=False), file_name="meta_ai_experiment_summary.csv", mime="text/csv")
     with st.expander("Full report"):
         st.markdown(results["report"])
+    if results.get("failure_analysis"):
+        with st.expander("Failure-case analysis"):
+            st.markdown(results["failure_analysis"])
+    if results.get("sensitivity"):
+        with st.expander("Sensitivity analysis (development seeds)"):
+            st.markdown(results["sensitivity"])
