@@ -34,8 +34,8 @@ from .orchestrator.orchestrator import load_config, summarize_evidence
 from .scenarios import CONDITIONS, generate, warmup_events
 
 AGENTS = ["anomaly_detection", "behavioral_fingerprint", "rule_detector", "threat_hunter", "red_team"]
-REPORTED = ["detection_rate", "false_escalation_rate", "decision_accuracy", "analyst_workload", "brier",
-            "governance_compliance", "agent_agreement_rate", "loo_robustness"]
+REPORTED = ["detection_rate", "false_escalation_rate", "benign_containment_rate", "decision_accuracy", "analyst_workload",
+            "brier", "governance_compliance", "agent_agreement_rate", "loo_robustness"]
 
 
 def _set(policies: dict[str, Any], path: tuple[str, ...], value: Any) -> dict[str, Any]:
@@ -183,14 +183,17 @@ def render_sensitivity_report(results: pd.DataFrame, metadata: dict[str, Any]) -
         "|" + "---|" * len(REPORTED),
         "| " + " | ".join(f"{base[m]:.3f}" for m in REPORTED) + " |",
         "",
-        "## Range across each parameter's values (max − min, pooled)",
+        "## Range across each parameter's values (max − min, pooled, frozen value included)",
         "",
         "| Parameter | Values | " + " | ".join(REPORTED) + " |",
         "|---|---|" + "---|" * len(REPORTED),
     ]
     for parameter, group in pooled[pooled["parameter"] != "baseline"].groupby("parameter", sort=False):
         values = ", ".join(group["value"])
-        spans = [f"{group[m].max() - group[m].min():.3f}" for m in REPORTED]
+        if not group["baseline"].any():
+            group = pd.concat([group, base.to_frame().T])  # weight variants: compare against the frozen ×1.0
+            values += ", frozen"
+        spans = [f"{float(group[m].max()) - float(group[m].min()):.3f}" for m in REPORTED]
         lines.append(f"| {parameter} | {values} | " + " | ".join(spans) + " |")
     lines += ["", "## Every variant (pooled)", "", "| Group | Parameter | Value | " + " | ".join(REPORTED) + " |",
               "|---|---|---|" + "---|" * len(REPORTED)]
