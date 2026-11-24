@@ -73,7 +73,7 @@ Repositories are organized by academic year and semester.
 | **2** | Yerus Kanaw, Yuval David | https://github.com/Yeruskanaw/Labs.git |
 | **3** | Sagi Akshikar  | https://github.com/SAGISOS/AI-CyberSecurity.git |
 | **4** | Tamara Karanovich, Adi Tavakoli | https://github.com/Tamarak12/Tamara_and_Adi |
-| **5** | Lior Mashiach, Golan Katzav | https://github.com/liorma6/CyberAi |
+| **5** | Lior Mashiach, Golan Katzav, Noam Rahamim | https://github.com/liorma6/CyberAi |
 | **6** | Shir Jermiahu, Orian Reuven | https://github.com/shirjer2401-ux/AI-Cyber-Security |
 | **7** | Paula Krasikov | https://github.com/paulakrasik/AI-driven-cybersecurity.git |
 | **8** | Liran Vainshtein | https://github.com/liranv2001-ops/liran-cybersecurity.git   |
