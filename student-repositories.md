@@ -77,7 +77,7 @@ Repositories are organized by academic year and semester.
 | **6** | Shir Jermiahu, Orian Reuven | https://github.com/shirjer2401-ux/AI-Cyber-Security |
 | **7** | Paula Krasikov | https://github.com/paulakrasik/AI-driven-cybersecurity.git |
 | **8** | Liran Vainshtein | https://github.com/liranv2001-ops/liran-cybersecurity.git   |
-| **9** | Rony Levy, Noa Cohen | https://github.com/ronylevy32/hit-cybersecurityAI/tree/main |
+| **9** | Rony Levy, Noa Cohen | https://github.com/Rony-Levy/hit-cybersecurityAI |
 | *10* | Lian Maor, Noy Mlynek | https://github.com/LianMaor/AI-Enhanced-Cybersecurity-Lian-Noy |
 | *11* | Elior Papo, Shira Rivlin | https://github.com/eliorpapo/Elior-Shira-CyberAI |
 | *12* | Hodaya Edri, Mali Alali | https://github.com/HodayaEdri/CyberSecurity- |
