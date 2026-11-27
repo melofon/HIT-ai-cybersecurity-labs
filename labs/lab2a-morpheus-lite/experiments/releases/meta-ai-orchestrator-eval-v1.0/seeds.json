@@ -1,0 +1,21 @@
+{
+  "development": [
+    1,
+    2,
+    3
+  ],
+  "calibration": [
+    999
+  ],
+  "evaluation": [
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "calibration_conditions": [
+    "clean",
+    "conflicting"
+  ]
+}

@@ -1,5 +1,27 @@
 # Version History
 
+## Meta-AI Orchestrator evaluation v1.0 - tag `meta-ai-orchestrator-eval-v1.0`
+
+Follows the supervisor's review of the first evaluation.
+
+- Three disjoint seed sets: development (1–3), calibration (999), held-out evaluation (101–105). Only held-out runs are official; each run records the code commit and a configuration hash.
+- New metrics: governance compliance, agent agreement rate, leave-one-out robustness.
+- Sensitivity analysis on development seeds (`run_sensitivity.py`) and failure-case analysis with a low-and-slow deep dive.
+- Frozen release package (`freeze_release.py`) in `experiments/releases/meta-ai-orchestrator-eval-v1.0/`.
+- The earlier results on seeds 1–3 are superseded; the fingerprint finding is reported as a case study, with the corrected count (32 of 37 dismissed).
+
+## Meta-AI Orchestrator extension - branch `feature/meta-ai-orchestrator`
+
+Feature branch on top of the 1.0.0 baseline (see the freeze policy in the README). Event schemas change only additively.
+
+- Explainable Meta-AI Orchestrator (`morpheus_lite/orchestrator/`): shared data contract, Evidence Board, governance constraints G1–G6, Agent Agreement Engine, weighted aggregation, uncertainty decomposition, leave-one-out robustness, Meta-XAI explanations, decision reconstruction.
+- Cases gain `meta_orchestrator` and `legacy_status`; `status` is now set from the orchestrator's autonomy level.
+- New Kafka topic `agent.meta_orchestrator`; human decisions also record the orchestrator's action, confidence and agreement state.
+- Dashboard tabs: Meta-AI Orchestrator, Instructor Dashboard, Experiments; local simulation mode without Kafka.
+- Experiment framework (`run_experiments.py`): four conditions, five systems plus variants and ablations, thirteen metrics.
+- Detector and agent logic moved into `morpheus_lite/detection.py` and `morpheus_lite/agents.py` (re-exported from the original scripts).
+- Docs: corrected the Docker Compose service name (`redpanda-console`).
+
 ## Morpheus Lite Laboratory 1.0.0 - 2026-07-25
 
 Release type: Stable educational and research laboratory baseline.

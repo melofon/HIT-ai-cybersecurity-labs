@@ -25,4 +25,4 @@ gpu = ["onnxruntime-gpu>=1.17"]
 dev = ["pytest>=8", "ruff>=0.5"]
 
 [tool.setuptools]
-packages = ["morpheus_lite", "morpheus_lite.inference"]
+packages = ["morpheus_lite", "morpheus_lite.inference", "morpheus_lite.orchestrator"]

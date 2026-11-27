@@ -93,7 +93,7 @@ Use a separate terminal for each running service. All terminals must be opened i
 ## Terminal 1 — Start Redpanda and the Redpanda Console
 
 ```powershell
-docker compose up -d redpanda console
+docker compose up -d redpanda redpanda-console
 ```
 
 Confirm the containers are running:

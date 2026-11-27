@@ -39,3 +39,7 @@ logs/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Experiment per-event output (regenerate with: python run_experiments.py)
+experiments/results/per_event.csv
+experiments/dev_results/

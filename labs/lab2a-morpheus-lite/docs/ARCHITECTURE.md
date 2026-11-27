@@ -67,6 +67,10 @@ Generates a plain-language explanation using the configured provider. The infere
 
 Reviews the quality and sufficiency of the AI-supported case. It can approve the reasoning, challenge it, request more evidence, or escalate it for human attention.
 
+### Meta-AI Orchestrator
+
+Coordinates the agents above without replacing them: normalizes each agent's output onto a shared contract, applies governance constraints first, measures agreement and disagreement, aggregates weighted support into one action, and records an explanation that can be replayed for audit. It decides whether a case needs human review. See [META_AI_ORCHESTRATOR.md](META_AI_ORCHESTRATOR.md).
+
 ### Dashboard
 
 Displays alerts, cases, evidence, RAI decisions, Meta-AI assessments, and human-decision controls. All panels use one shared selection state:

@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-11-16T18:38:25.712471+00:00",
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "seed_role": "development",
+  "conditions": [
+    "clean",
+    "conflicting",
+    "noisy",
+    "adversarial"
+  ],
+  "n_events": 400,
+  "design": {
+    "orchestrator_version": "1.0.0",
+    "git_commit": "562ba2aaf2613e49e80f1aebe943b91d71203b71",
+    "uncommitted_changes": false,
+    "config_sha256": "ec808ff42506c75226d60e5e8c4b3328753750382930c980a7c2b2b08e5caab8",
+    "config": {
+      "orchestrator": {
+        "agent_weights": {
+          "anomaly_detection": 1.0,
+          "behavioral_fingerprint": 0.9,
+          "rule_detector": 1.0,
+          "threat_hunter": 1.2,
+          "red_team": 0.9
+        },
+        "split_margin": 0.15,
+        "adaptive_weighting": true,
+        "reliability_file": "data/agent_reliability.json",
+        "use_governance": true,
+        "use_uncertainty": true
+      },
+      "governance": {
+        "destructive_action_requires_human": true,
+        "minimum_evidence_for_high_risk": 2,
+        "minimum_confidence_for_autonomy": 0.6,
+        "credential_compromise_min_sources": 2,
+        "corroborated_threat_min_sources": 3,
+        "minimum_data_quality_for_dismissal": 0.75
+      },
+      "thresholds": {
+        "alert": 60,
+        "high_risk": 85
+      }
+    }
+  },
+  "metrics": [
+    "detection_rate",
+    "false_escalation_rate",
+    "benign_containment_rate",
+    "decision_accuracy",
+    "analyst_workload",
+    "brier",
+    "governance_compliance",
+    "agent_agreement_rate",
+    "loo_robustness"
+  ],
+  "note": "One-at-a-time variations around the frozen design, on development seeds only. No parameter was changed on the basis of these results."
+}
