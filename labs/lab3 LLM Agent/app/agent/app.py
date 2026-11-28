@@ -108,7 +108,7 @@ def show_data(
 
 api_base_url = os.getenv("API_BASE_URL")
 api_key = os.getenv("API_KEY")
-model = os.getenv("MODEL", "qwen/qwen3-32b")
+model = os.getenv("MODEL", "openai/gpt-oss-120b")
 
 if not api_key:
     raise RuntimeError(
@@ -161,6 +161,20 @@ Rules:
 5) For casual small talk (hello, how are you), answer briefly
    (e.g. 'Hi', 'All good', 'Okay'), but if the question is about the
    datasets, focus on using the tools.
+
+6) Never respond with a generic greeting when the user
+   asks a question about data.
+
+7) When the user asks about dataset fields, structure,
+   records or meaning, call describe_dataset.
+
+8) After executing a tool, answer the original question
+   explicitly using the returned evidence.
+
+9) If a dataset does not exist, explain the error clearly.
+
+10) If the dataset reference is ambiguous, ask the user
+    for clarification rather than guessing.
 
 Always answer in English.
 """
@@ -216,7 +230,7 @@ async def on_message(message: cl.Message):
     response = await assistant.a_run(
         message=message.content,
         clear_history=False,
-        max_turns=6,
+        max_turns=2,
         summary_method="last_msg",
         user_input=False,
     )
